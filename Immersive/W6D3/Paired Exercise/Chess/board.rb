@@ -2,7 +2,7 @@ require_relative 'pieces'
 require "byebug"
 
 class Board
-
+    attr_reader :grid
     def initialize
       @grid = Array.new(8) { Array.new(8)}
 
@@ -67,10 +67,25 @@ class Board
       # raise "The peice cannot move to end_pos"
 
       # Set if statements for non-valid moves and no-piece start_pos
-      self[end_pos] = self[start_pos]
-      self[start_pos] = NullPiece.instance 
+      # non-valid moves : valid_pos? / end_pos same color as start_pos / 
+      begin
+        if start_pos == end_pos 
+          raise NoPieceHereError
+        end     
 
+        if !valid_pos?(end_pos) || self[start_pos].color == self[end_pos].color 
+          raise CannotMoveHereError 
+        end
+
+        self[end_pos] = self[start_pos]
+        self[start_pos] = NullPiece.instance 
+      rescue NoPieceHereError => exception
+        exception.message
+      rescue CannotMoveHereError => exception 
+        exception.message     
       end
+
+    end
 
     def display 
       (0..7).each do |row|
@@ -82,6 +97,17 @@ class Board
     end
 end
 
+class CannotMoveHereError < StandardError
+  def message 
+    puts "You can not move here silly :)"
+  end 
+end
+
+class NoPieceHereError < StandardError 
+  def message
+    puts "There is no piece to move"
+  end
+end
 
 
 # =begin   

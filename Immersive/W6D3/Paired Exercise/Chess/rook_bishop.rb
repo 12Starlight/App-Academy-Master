@@ -5,6 +5,6 @@ include Slideable
   attr_reader: :symbol :color 
   def initialize(color)
     @color = color
-    @symbol = "♝".colorize(color)
+    @symbol = "♜".colorize(color)
   end
 end

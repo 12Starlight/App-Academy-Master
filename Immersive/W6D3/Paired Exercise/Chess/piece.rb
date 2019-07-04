@@ -1,4 +1,5 @@
 require_relative 'board.rb'
+require "colorize"
 
 class Piece
   def initialize(color, board, pos)
@@ -7,29 +8,29 @@ class Piece
     @pos = pos
   end
 
-  def to_s
+  # def to_s
 
-  end
+  # end
 
-  def empty?
+  # def empty?
 
-  end
+  # end
 
-  def valid_moves
+  # def valid_moves
 
-  end
+  # end
 
-  def pos=(val)
-    @pos = val 
-  end
+  # def pos=(val)
+  #   @pos = val 
+  # end
 
-  def symbol
+  # def symbol
 
-  end
+  # end
 
-  private
+  # private
 
-    def move_into_check?(end_pos)
+  #   def move_into_check?(end_pos)
 
-    end
+  #   end
 end

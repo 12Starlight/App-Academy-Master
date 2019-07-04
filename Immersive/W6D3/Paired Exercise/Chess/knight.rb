@@ -1,6 +1,10 @@
-require_relative 'piece.rb'
+require_relative "piece"
+require_relative "stepable"
+require "colorize"
+
 class Knight < Piece
-  attr_reader: :symbol :color 
+  include Stepable
+  attr_reader :symbol, :color 
   def initialize(color)
     @color = color
     @symbol = "♞".colorize(color)

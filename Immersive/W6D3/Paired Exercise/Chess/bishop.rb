@@ -1,10 +1,12 @@
-require_relative 'piece'
-require_relative 'module_slideable'
+require_relative "piece"
+require_relative "slidable"
+require "colorize"
+
 class Bishop < Piece
-    include Slideable
-    attr_reader :color, :symbol
-    def initialize(color)
-        @symbol = '♟'.colorize(color)
-        @color = color
-    end
-end
+  include Slidable
+  attr_reader :symbol, :color 
+  def initialize(color)
+    @color = color
+    @symbol = "♗".colorize(color)
+  end
+end 

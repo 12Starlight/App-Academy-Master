@@ -1,0 +1,11 @@
+require_relative "bishop"
+require_relative 'king'
+require_relative "queen"
+require_relative "knight"
+require_relative "null_piece"
+require_relative "pawn"
+require_relative "rook"
+require_relative "slidable"
+require_relative "stepable"
+require_relative "piece"
+require "colorize"

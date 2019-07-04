@@ -1,0 +1,3 @@
+class Curser
+
+end

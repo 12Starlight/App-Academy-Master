@@ -1,27 +1,27 @@
 class Card
   include Comparable
 
-  SUIT_STRINGS = {
-    :clubs    => "♣",
-    :diamonds => "♦",
-    :hearts   => "♥",
-    :spades   => "♠"
+  SUIT_STRINGS = {    # Index Values 
+    :clubs    => "♣", # 0
+    :diamonds => "♦", # 1
+    :hearts   => "♥", # 2
+    :spades   => "♠"  # 3 
   }
 
-  VALUE_STRINGS = {
-    :two   => "2",
-    :three => "3",
-    :four  => "4",
-    :five  => "5",
-    :six   => "6",
-    :seven => "7",
-    :eight => "8",
-    :nine  => "9",
-    :ten   => "10",
-    :jack  => "J",
-    :queen => "Q",
-    :king  => "K",
-    :ace   => "A"
+  VALUE_STRINGS = {   # Index Values
+    :two   => "2",    # 0
+    :three => "3",    # 1
+    :four  => "4",    # 2
+    :five  => "5",    # 3
+    :six   => "6",    # 4
+    :seven => "7",    # 5
+    :eight => "8",    # 6
+    :nine  => "9",    # 7
+    :ten   => "10",   # 8
+    :jack  => "J",    # 9
+    :queen => "Q",    # 10
+    :king  => "K",    # 11
+    :ace   => "A"     # 12
   }
 
   def self.suits
@@ -33,17 +33,17 @@ class Card
   end
 
   def self.values
-    VALUE_STRINGS.keys
+    VALUE_STRINGS.keys 
   end
 
   attr_reader :suit, :value
 
   def initialize(suit, value)
-    unless Card.suits.include?(suit) and Card.values.include?(value)
-      raise "illegal suit (#{suit.inspect}) or value (#{value.inspect})"
+    unless SUIT_STRINGS.keys.include?(suit) && VALUE_STRINGS.keys.include?(value)
+      raise "illegal suit #{suit.inspect} or value #{value.inspect}"
     end
 
-    @suit, @value = suit, value
+    @suit, @value = suit, value 
   end
 
   def to_s
@@ -56,11 +56,25 @@ class Card
 
   def <=>(other_card)
     if self == other_card
-      0
-    elsif value != other_card.value
+      0 
+    elsif value != other_card.value 
       Card.values.index(value) <=> Card.values.index(other_card.value)
-    elsif suit != other_card.suit
+    elsif suit != other_card.suit 
       Card.suits.index(suit) <=> Card.suits.index(other_card.suit)
     end
   end
 end
+
+
+
+# I will graduate from App Academy, November 1st 2019 and 
+# work in my field 
+
+# I will graduate from App Academy, November 1st 2019 and 
+# work in my field 
+
+# I will graduate from App Academy, November 1st 2019 and 
+# work in my field 
+
+# I will graduate from App Academy, November 1st 2019 and 
+# work in my field 

@@ -1,0 +1,42 @@
+div {
+  height: 200px;
+  width: 200px;
+  padding: 50px;
+  border: 5px solid black;
+}
+
+#first-div {
+  background-color: #39cccc;
+}
+
+#second-div {
+  background-color: #ff4136;
+  box-sizing: border-box;
+}
+
+p {
+  background-color: #7fdbff;
+  height: 100px;
+  /* width: 300px; */
+}
+
+.box {
+  display: inline;
+  background: white; 
+
+  width: 10px;
+  height: 10px;
+
+  padding: 20px;
+}
+
+
+/*
+                    5px
+                    50px
+                  |======|
+         5px 50px | 200px| 50px 5px
+                  |======|
+                    50px
+                    5px
+*/

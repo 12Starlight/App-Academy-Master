@@ -150,17 +150,17 @@ def alien_cast
 
   # Solved using two INNER JOIN's 
   execute(<<-SQL)
-    SELECT 
-      actors.name 
-    FROM
-      actors 
+    SELECT
+      actors.name
+    FROM  
+      actors
     INNER JOIN
-      castings ON castings.actor_id = actors.id 
+      castings ON castings.actor_id = actors.id
     INNER JOIN
-      movies ON movies.id = castings.movie_id
+      movies ON castings.movie_id = movies.id
     WHERE
-      movies.title = 'Alien'
-    ORDER BY 
+      movies.title = ('Alien')
+    ORDER BY
       actors.id 
   SQL
 end

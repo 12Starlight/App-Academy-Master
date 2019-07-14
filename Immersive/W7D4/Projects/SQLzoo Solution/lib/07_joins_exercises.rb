@@ -208,9 +208,9 @@ def colleagues_of_garfunkel
   execute(<<-SQL)
     SELECT
       a1.name
-    FROM (
+    FROM (  -- movies with actor, AS m1
         SELECT
-          movies.*
+          movies.* -- movies.id 
         FROM
           movies
         JOIN
@@ -220,9 +220,9 @@ def colleagues_of_garfunkel
         WHERE
           actors.name = 'Art Garfunkel'
       ) AS m1
-    JOIN (
+    JOIN ( -- movies without actor, movie_id; AS a1
         SELECT
-          actors.*,
+          actors.*, -- actors.name
           castings.movie_id
         FROM
           actors

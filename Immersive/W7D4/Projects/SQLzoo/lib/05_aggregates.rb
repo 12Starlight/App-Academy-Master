@@ -8,6 +8,9 @@
 #  population  :integer
 #  gdp         :integer
 
+
+# FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER, LIMIT
+
 require_relative './sqlzoo.rb'
 
 def example_sum

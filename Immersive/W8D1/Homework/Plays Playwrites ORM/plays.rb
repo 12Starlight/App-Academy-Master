@@ -79,5 +79,10 @@ class Play
     plays.map { |play| Play.new(play) }
   end
 
-  
+  def initialize(options)
+    @id = options['id']
+    @title = options['title']
+    @year = options['year']
+    @playwright_id = options['playwright_id']
+  end
 end

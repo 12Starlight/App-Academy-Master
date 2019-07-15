@@ -85,4 +85,16 @@ class Play
     @year = options['year']
     @playwright_id = options['playwright_id']
   end
+
+  def insert 
+    raise "#{self} already in database" if self.id 
+    PlayDBConnection.instance.execute(<<-SQL, self.title, self.year, self.playwright_id)
+      INSERT INTO
+        plays (title, year, playwright_id)
+      VALUES
+        (?, ?, ?)
+    SQL
+
+    self.id = PlayDBConnection.instance.last_insert_row_id
+  end
 end

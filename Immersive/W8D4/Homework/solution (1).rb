@@ -47,8 +47,7 @@ class SnackBox
     @data = data
   end
 
-  # Bone Methods
-  def get_bone_info(box_id) 
+  def get_bone_info(box_id)
     @data[box_id]["bone"]["info"]
   end
 
@@ -56,7 +55,6 @@ class SnackBox
     @data[box_id]["bone"]["tastiness"]
   end
 
-  # Kibble Methods
   def get_kibble_info(box_id)
     @data[box_id]["kibble"]["info"]
   end
@@ -65,7 +63,6 @@ class SnackBox
     @data[box_id]["kibble"]["tastiness"]
   end
 
-  # Treat Methods
   def get_treat_info(box_id)
     @data[box_id]["treat"]["info"]
   end
@@ -105,40 +102,30 @@ class CorgiSnacks
 
 end
 
-
 class MetaCorgiSnacks
   def initialize(snack_box, box_id)
     @snack_box = snack_box
     @box_id = box_id
+    snack_box.methods.grep(/^get_(.*)_info$/) { MetaCorgiSnacks.define_snack $1 }
   end
 
-  # Phase I
+  # phase 1
   def method_missing(name, *args)
-    
-    # saved to a variable
-    #     called the class
-    # 	              used send 
-    # 	                  used string interpolation
-    # 					                  passed in name to build method 
-    # 					                                passed in @attribute
-    #                                           passed @attribute into newly created method without using parenthesis
     info = @snack_box.send("get_#{name}_info", @box_id)
-    
-    # same as above
     tastiness = @snack_box.send("get_#{name}_tastiness", @box_id)
-    
-    # looks like we changed name to a string, then an array, then capitalized it, then returned it back to a string and saved it in the variable name
-      # why?
-    name = "#{name.to_s.split("_").map(&:capitalize).join(" ")}"
-    
-    # same as methods in CorgiSnacks, just added category name and capitalized it
+    name = "#{name.to_s.split('_').map(&:capitalize).join(' ')}"
     result = "#{name}: #{info}: #{tastiness} "
-    
-    # same as methods in CorgiSnacks
-    tastiness > 3 ? "* #{result}" : result
+    tastiness > 30 ? "* #{result}" : result
   end
 
+  # phase 2
   def self.define_snack(name)
-    # Your code goes here...
+    define_method(name) do
+      info = @snack_box.send("get_#{name}_info", @box_id)
+      tastiness = @snack_box.send("get_#{name}_tastiness", @box_id)
+      display_name = "#{name.split('_').map(&:capitalize).join(' ')}"
+      result = "#{display_name}: #{info}: #{tastiness}"
+      tastiness > 30 ? "* #{result}" : result
+    end
   end
 end

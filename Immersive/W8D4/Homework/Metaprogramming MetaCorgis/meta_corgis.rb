@@ -113,10 +113,10 @@ class MetaCorgiSnacks
   end
 
   def method_missing(name, *args)
-    name.send(get_info(*args))
-    name.send(get_tastiness(*args))
+    self.SnackBox.each do |arg|
+      send(*args)
+    end
   end
-
 
   def self.define_snack(name)
     # Your code goes here...

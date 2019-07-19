@@ -43,18 +43,7 @@ end
 def ford_films
   # List the films in which 'Harrison Ford' has appeared.
   execute(<<-SQL)
-    SELECT
-      movies.title 
-    FROM
-      movies
-    INNER JOIN
-      castings ON castings.movie_id = movies.id
-    INNER JOIN
-      actors ON castings.actor_id = actors.id
-    WHERE
-      actors.name = 'Harrison Ford'
-    ORDER BY
-      yr
+ 
   SQL
 end
 
@@ -63,36 +52,14 @@ def ford_supporting_films
   # role. [Note: the ord field of casting gives the position of the actor. If
   # ord=1 then this actor is in the starring role]
   execute(<<-SQL)
-    SELECT
-      movies.title 
-    FROM
-      movies
-    INNER JOIN
-      castings ON castings.movie_id = movies.id
-    INNER JOIN
-      actors ON castings.actor_id = actors.id
-    WHERE
-      actors.name = 'Harrison Ford' AND castings.ord != 1
-    ORDER BY
-      yr
+ 
   SQL
 end
 
 def films_and_stars_from_sixty_two
   # List the title and leading star of every 1962 film.
   execute(<<-SQL)
-    SELECT
-      movies.title, actors.name 
-    FROM
-      movies
-    INNER JOIN
-      castings ON castings.movie_id = movies.id
-    INNER JOIN
-      actors ON castings.actor_id = actors.id
-    WHERE
-      yr = 1962 AND ord = 1
-    ORDER BY
-      yr 
+ 
   SQL
 end
 
@@ -102,20 +69,7 @@ def travoltas_busiest_years
   # In SELECT, COUNT(movies.yr) is the same as COUNT(*)
   # We defined COUNT(*) in having  
   execute(<<-SQL)
-    SELECT
-      movies.yr, COUNT(*)
-    FROM
-      movies
-    INNER JOIN
-      castings ON castings.movie_id = movies.id
-    INNER JOIN
-      actors ON castings.actor_id = actors.id
-    WHERE 
-      actors.name = 'John Travolta' 
-    GROUP BY
-      movies.yr
-    HAVING 
-      COUNT(*) >= 2
+  
   SQL
 end
 
@@ -126,27 +80,7 @@ def andrews_films_and_leads
     # SELECT must match WHERE 
   # INNER JOIN's must join to your FROM statment  
   execute(<<-SQL)
-    SELECT
-      movies.title, actors.name
-    FROM
-      actors
-    INNER JOIN
-      castings ON castings.actor_id = actors.id
-    INNER JOIN
-      movies ON castings.movie_id = movies.id
-    WHERE
-      movies.id IN (
-        SELECT
-          movies.id
-        FROM
-          movies
-        INNER JOIN
-          castings ON castings.movie_id = movies.id
-        INNER JOIN
-          actors ON castings.actor_id = actors.id
-        WHERE
-          actors.name = 'Julie Andrews'
-      ) AND castings.ord = 1
+ 
   SQL
 end
 
@@ -156,20 +90,7 @@ def prolific_actors
   # aggregate functions COUNT() should match GROUP BY, * is a shortcut
   # WHERE goes before GROUP BY
   execute(<<-SQL)
-    SELECT
-      actors.name
-    FROM
-      actors 
-    INNER JOIN
-      castings ON castings.actor_id = actors.id
-    WHERE
-      castings.ord = 1
-    GROUP BY
-      actors.name
-    HAVING
-      COUNT(actors.name) >= 15 
-    ORDER BY
-      actors.name 
+  
   SQL
 end
 
@@ -180,18 +101,7 @@ def films_by_cast_size
   # COUNT (DISTINCT castings.actor_id), removes duplicate actor_id's
     # COUNT(movies.id), same as just counting movies id's 
   execute(<<-SQL)
-    SELECT
-      movies.title, COUNT(DISTINCT castings.actor_id) AS actor_count
-    FROM 
-      movies
-    INNER JOIN
-      castings ON castings.movie_id = movies.id
-    WHERE
-      movies.yr = 1978
-    GROUP BY
-      movies.id
-    ORDER BY
-      COUNT(movies.id) DESC, movies.title ASC
+
   SQL
 end
 
@@ -202,29 +112,6 @@ def colleagues_of_garfunkel
   # match the a1.id with the m1.movie_id
     # return m1.name 
   execute(<<-SQL)
-    SELECT
-      m1.name 
-    FROM (
-      SELECT
-        actors.name, movie_id
-      FROM
-        actors
-      INNER JOIN
-        castings ON castings.actor_id = actors.id
-      WHERE
-        actors.name != 'Art Garfunkel'
-    ) AS m1
-    INNER JOIN (
-      SELECT
-        movies.id
-      FROM
-        movies
-      INNER JOIN
-        castings ON castings.movie_id = movies.id
-      INNER JOIN
-        actors ON castings.actor_id = actors.id
-      WHERE
-        actors.name = 'Art Garfunkel'
-    ) AS a1 ON m1.movie_id = a1.id
+ 
   SQL
 end

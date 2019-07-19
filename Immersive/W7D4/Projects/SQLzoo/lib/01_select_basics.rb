@@ -42,7 +42,7 @@ def per_capita_gdp
     SELECT
       name, (gdp/population)
     FROM
-      countries 
+      countries
     WHERE
       area > 5000000
   SQL
@@ -53,11 +53,11 @@ def small_and_wealthy
   # and the gdp is more than 5,000,000,000.
   execute(<<-SQL)
     SELECT
-      name, continent 
+      name, continent
     FROM
-      countries 
+      countries
     WHERE
-      area < 2000 AND gdp > 5000000000
+      gdp > 5000000000 AND area < 2000
   SQL
 end
 
@@ -67,9 +67,9 @@ def scandinavia
   execute(<<-SQL)
     SELECT
       name, population
-    FROM 
-      countries 
-    WHERE 
+    FROM
+      countries
+    WHERE
       name IN ('Denmark', 'Finland', 'Norway', 'Sweden')
   SQL
 end
@@ -83,9 +83,9 @@ def starts_with_g
     SELECT
       name
     FROM
-      countries 
+      countries
     WHERE
-      name LIKE ('G%') 
+      name LIKE 'G%'
   SQL
 end
 

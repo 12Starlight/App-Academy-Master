@@ -33,6 +33,7 @@ end
 def all_teachers_join
   # Use a type of JOIN that will list all teachers and their department,
   # even if the department in NULL/nil.
+  # LEFT OUTER JOIN the table that has null values 
   execute(<<-SQL)
     SELECT
       teachers.name, depts.name 

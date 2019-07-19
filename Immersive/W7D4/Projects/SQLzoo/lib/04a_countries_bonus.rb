@@ -8,6 +8,9 @@
 #  population  :integer
 #  gdp         :integer
 
+
+# FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER, LIMIT
+
 require_relative './sqlzoo.rb'
 
 # BONUS QUESTIONS: These problems require knowledge of aggregate

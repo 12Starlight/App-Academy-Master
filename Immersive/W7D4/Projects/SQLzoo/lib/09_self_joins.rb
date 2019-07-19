@@ -12,6 +12,9 @@
 #  pos         :integer      not null, primary key
 #  stop_id     :integer
 
+
+# FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER, LIMIT
+
 require_relative './sqlzoo.rb'
 
 def num_stops

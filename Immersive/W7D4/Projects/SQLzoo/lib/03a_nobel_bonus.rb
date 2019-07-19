@@ -6,6 +6,9 @@
 #  subject     :string
 #  winner      :string
 
+
+# FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER, LIMIT
+
 require_relative './sqlzoo.rb'
 
 # BONUS PROBLEM: requires sub-queries or joins. Attempt this after completing

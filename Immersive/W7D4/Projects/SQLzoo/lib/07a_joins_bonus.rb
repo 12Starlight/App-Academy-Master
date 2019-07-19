@@ -21,6 +21,9 @@
 # posn         :integer      not null
 # song         :string
 
+
+# FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER, LIMIT
+
 require_relative './sqlzoo.rb'
 
 def alison_artist

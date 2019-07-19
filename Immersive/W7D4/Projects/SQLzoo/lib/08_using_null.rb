@@ -13,6 +13,9 @@
 #  id          :integer      not null, primary key
 #  name        :string       not null
 
+
+# FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER, LIMIT
+
 require_relative './sqlzoo.rb'
 
 def null_dept

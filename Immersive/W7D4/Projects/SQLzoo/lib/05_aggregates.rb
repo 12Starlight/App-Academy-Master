@@ -15,7 +15,10 @@ require_relative './sqlzoo.rb'
 
 def example_sum
   execute(<<-SQL)
-
+    SELECT
+      SUM(population)
+    FROM
+      countries
   SQL
 end
 
@@ -23,7 +26,7 @@ def continents
   # List all the continents - just once each.
   # DISTINCT(continent) - removes the duplicate continents
   execute(<<-SQL)
- 
+
   SQL
 end
 

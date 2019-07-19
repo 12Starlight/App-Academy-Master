@@ -1,3 +1,7 @@
+
+
+# FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER, LIMIT
+
 require 'pg'
 
 def execute(sql)

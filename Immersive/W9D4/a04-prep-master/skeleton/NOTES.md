@@ -188,4 +188,124 @@
   
   login(user)
     How can we tell a user is logged in? How do we define that relationship between the user that might be logged in and a website? 
-      ANSWER: 
+      ANSWER: We can actally use the session's session_token which is really just one of the cookies that we have access to that is going to have some of that information and the browser is going to have the session hash. So, we can go ahead and key into that
+
+    Start with the first one
+      session[:session_token]
+        What we want to do here with this user, we want to go ahead and say we have this user and we can assume this user exists in our database because we will not call this method unless we have not shared that before. So, we will assume that this user is a true user object which means it has access to all those methods that we wrote on that user object in our user model
+
+        bescause we wrote our reset_session_token! in a way that returns our session_token outside of the method as the last thing it returns, we know that the result of this will be the same session token that we can find, if we were to look in the database at this user. 
+
+        So, by setting up this relationship, we are saying this user and their new session token is matching the session hash and the session's hash's session token. Now the relationship is good to go.
+      
+    Make the second one
+      @current_user = user 
+        Makes things easier for the next method 
+
+  current_user
+    We are building this method, so we have access later on when ever we need to call this method to the current_user and we are going to do that by saying either defer to the current_user instance variable, if it indeed already exists. Otherwise, find a user in our database using a possession token becauses that is how we know they will be logged in.
+
+    Start with the first one
+      @current_user ||= User.find_by_session_token(session[:session_token])
+        This is a Rails built in method that we can call which will allow us to either defer to the current_user instance variable or go ahead and find a user based off of their session token. This will be our current user
+
+  require_login
+    We want to make sure that unless the user is logged in, they can not access our site
+  
+    Start with the first one
+      redirect_to new_session_url unless logged_in?
+        We want to redirect them to the login page unless they are logged in. Which is another way of saying that we are sending them to the sign in page
+
+  logged_in? 
+    We want a Boolean value because we are using a question mark. 
+      current_user
+        How can we know a user is logged in?
+          ANSWER: We can look at the curent user, if their is a current_user, then that user is probably logged in. If there is no current_user, then nobody is logged in
+
+          But, this is just an instance variable right here, not a Boolean value and we are relying on that Boolean value inside of the conditional for the preivous method ( require_login )
+
+        How can we turn this instance variable into a Boolean?
+          ANSWER: We are going to go ahead and use a !! and what that is going to do is say, if indeed an instance variable, then a user is returned back from this method which will be a truthy value. The first ! is going to turn this into a false value. The second ! turns the whole expression into a true Boolean value, if indeed there is a current user
+            !! current_user 
+
+  logout 
+    The relationship between a user and the browser is defined by their session_token. If we sever that relationship, there will be no more current_user and nobody will be logged in. 
+      
+    Start with the first one  
+      current_user.reset_session_token!
+        This resets the session token for the current_user. It will go into our table, our database and reset the value of that column. So, now on one side there is no relationship between that current_user and the browser session hash
+
+    Move onto the second one
+      session[:session_token] = nil
+        For a double layer of security, we are going to go ahead and set session:[:session_token] to nil. So, now neither of them are pointing at each other or anything closely matching
+
+  This file only will pass one spec, which is checking if we are protected against CSRF attacks. So, we do not need to run rspec at this point
+
+## Eigth build controllers
+  rails g controller Users   
+    Creates that users_controller file and a directory in our views folder for the templets, where our templets will go. 
+  
+  rails g controller Sessions
+    Our user auth pattern relys not only on a user, but also a session controller. We make it plural by convention and also, we want to make sure it can handle all of the sessions that are going to be created and not just the sessions for that one user which in routes is the case. The user is only ever able to influence their individual session
+
+  Before moving on, go to routes
+    new, create 
+      We could do resources :users and get all the resourceful routes that we need,however we do not need them all. So, run the spec for users_controller to find out exactly what we need. 
+
+      We need a new and a create because we want to be able to create a new user and we want to be able to have a page to create a new user in the UsersController. 
+
+    Next make sure these two actions have corresponding views. 
+      So, in views --> users, create a new file and for now call it new.html.erb. Then at the top of the file just put a string "new"
+
+      Next, go to views --> sessions, create a new file and for now call it new.html.erb. Then at the top of the file just put a string "new"
+        If we want to make sure that users have the full functionality that they might need in order to create a session, we need a new 
+
+        What else do we need in sessions? Do we need a whole page in order to have them be able to sign out? What about a whole page for editing their session? 
+          ANSWER: They should not be editing their session and probably do not need a whole page to log out, just a button. So new is all we need 
+
+  Now move onto routes and use that same logic above
+    resources :users, only: [:create, :new]
+      We know that we only need that create and that new, because that is what the specs told us. 
+      
+    resource :sesssion, only: [:create, :new, :destroy]  
+      Then for resource, right do not forget, resource :session, singular. We only want what?
+        ANSWER: We only want that create, :new, and :destroy
+          That allows us to go to the login page, to sign in or log out
+    
+  Move routes.rb over to the side of the screen with the readme because you are going to want to think about your routes as you write your controllers. Then look at the specs to see what the methods do in the controllers
+
+  UsersController
+    new 
+      @user = user.new
+        Render new users templet. So that means that there is going to be an empty user there, ready for us to add stuff to, if we want to on our templet there on the front end.  
+
+    create
+      Build first part
+        We know it is going to happen inside this UserController create action. We know that we are going to get some information from the front end, we want to hopefully save it into our database as a nice sparkling new user.
+
+        We want to make sure that, if a user comes in we can go ahead and leverage the method below to pass through all the stuff we do want in this case, username and password and create a new user from that information
+          @user = User.new(user_params)
+    
+      Build second part
+        if @user.save 
+          login(@user)
+          # redirect_to links_url
+        else 
+          flash.now[:errors] = @users.errors.full_messages
+        end
+          We want to do something with this user, let us say we get the user. We still have to save it. Then ensure that they log in, so we want to point them in the right direction. Look at the rspec to see, where you want to point them which says:
+            When you create a user with valid params (so it does not need saving), we want to redirect that user to the links index on success and we want to log in the user. It does not give a lot of information where we are going to send it, but the hint is: links index. 
+            
+            So, want to assume that rails is going to do exectly what we want it to do and that rails is going to have our back on this. Convention will allow us to uses this links_url to referece a particular index on our rails LinksController. Comment it out for now because there is no links_url yet
+
+            When we save somthing, there has to be an account of when it is not saved. So, if there are errors, we want to tell the user all that. Look at the rspec to see where we want the users to go
+              It does not even care
+                render :new 
+                  This allows us to render the page and send all the errors with it. Then run the rspec and ignore the commented out line because we have not built that links controller yet
+
+    user_params     
+      params.require(:user).permit(:usesrname, :password)
+        Allows us to ensure that the only methods that we are getting, from our front end is exactly what we want. So, in this case, what do we need to make a user?
+          ANSWER: We probably need a :username, and :password. The rest of this stuff, the password digest, the session token, all that stuff is going to get generated for us in our model where we made all that functionality. When someone wants to create a new user, that is what we are looking for. 
+
+  SessionsController

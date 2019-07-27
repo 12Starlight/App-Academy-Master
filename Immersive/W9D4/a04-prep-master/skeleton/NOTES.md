@@ -309,3 +309,196 @@
           ANSWER: We probably need a :username, and :password. The rest of this stuff, the password digest, the session token, all that stuff is going to get generated for us in our model where we made all that functionality. When someone wants to create a new user, that is what we are looking for. 
 
   SessionsController
+    Look at the specs, then look at the routes for session. We have :create, :new, and :destroy
+      create
+        Build first part
+          user = User.find_by_credentials(params[:user][:username], params[:user][:password])
+            We know that the session controller is not tied to any one model and that is because we are going to use it to sort of interact with the login capability and logout capability of our users. 
+              What does it mean to create a session?
+                ANSWER: That means that we have a user and we are trying to log them in or trying to establish this connection between their session tokens, the browser session token, the user session token. How might we go about doing that?
+                  ANSWER: Look at the specs which says: When they sign in with the correct credentials, that we can actually sign them in and we want to make sure that, if they sign in with the wrong credentials, we return them to sign in. 
+
+                  So, this is key here. It is that new session URL we were talking about earlier. But, the word credentials hopefully rings a bell. We can say that we want to find the user, not by the session_token,but instead by find_by_credentials which we wrote a long time ago in the user model. 
+                  
+                  So, it is going to take in that username, and that params hash is going to have its whole information in a bunch of subkeys. So, it is going to have the params hash and inside of that params hash, we will have this user object which is going to have its own set of keys; in this case a username and a password
+
+        Build second part
+          if user
+            login(user)
+            redirect_to links_url
+          else  
+            flash.now[:errors] = "NO GO on the username and password"
+            render :new 
+          end  
+            We want to make sure we even have a user. So, if there is a user, then log in that user using one of the methods we just made. If there is not a user, then we want to show that user that they messed up and send them some custom errors because unlike some of the other controllers we will do, we did not create anything here. 
+            
+            There was no errors that were sent back to us from our validations. This is goint to be completely us, we get to come up with the error. Then look at the rspec. It says it wants us to return the user to sign in ( render :new ), if there are invalid credentials and redirect_to links index on success.  
+
+      new
+        We do not need to do anything here, we do not have a model associated with this controller, where we need to render an empty object 
+
+      destroy
+        logout
+        redirect_to new_session_url
+          Logs out the current user   
+            logout does not take anything, double check it by looking at ApplicationController where you built it, if you want. Then redirect to new session URL. So, if you get logged out, you go back to the login page. Remember, ignore the links_index 
+
+  LinksController
+    rails g controller Links
+      Build routes in routes.rb by looking at the links rspec which say: We need :new, :create, :index, :show, :edit, and :update
+        resources :links 
+          Builds them all at once. Then run rails routes and look at the different routes 
+
+      Looking at rails routes
+        Notice: We got some user routes, session routes and a whole bunch of link routes. There is the links URL that pretty just gets to all those links later on when we want to
+
+    Go to LinksController
+      Write out the skeleton for index, show, new, create, update, edit, destroy and link_params because we are going to be passing in some information, we want to make sure that information is information we allow. Write out the last method entirely  
+
+    At the top
+      before_action :require_login
+        Look at the rspec for links and notice that a bunch of the failing specs correspond to when we are logged out. Rails has these sweet callbacks that we can go ahead and make use of. What this is saying is before you try to handle any of these actions, you have to require this. So, if the user is not logged in, then they will be sent back to the login page. Then run rspec again and you will see a way better number of passing specs
+
+    rspec
+      We still have a new, create, index, login, etc
+
+    index
+      @links = Link.all
+        Look at rails routes. We can loosely think of that as whenever we wanna go ahead and render a bunch of stuff.
+
+    show
+      @link = Link.find(params[:id])
+        We wanna go ahead and render, just like one. We can expect that anytime we are hitting these actions, we are going to have some kind of params. Sometimes the params hash will be empty, but because of how Rails is going to go ahead and create this show route for us, we know we will have an ID there in the wild card pretty much everytime. 
+
+        So, we can leverage that ID to find the specific link that should be on that show page, and then just return that link
+
+    new
+      @link = Link.new
+        This is us creating a blank object and we can later on, use that object in our edit and our create. When we want to edit some stuff, we will go ahead and add some more things to this empty link object and hopefull be able to save it down in our create method
+
+    create
+      @link = Link.new(link_params)
+        We are trying to create a link. We need to create an empty object. But, this time we are going to fill it with stuff from the private method below. So, we create a new link with those params. 
+
+      @link.user_id = current_user.id
+        But, a new link is perhaps a bit more than just a title and URL, right?
+          ANSWER: As you might remember, a link is going to have a user_id. How could we find the specific user_id that would correspond to the link we are trying to create?
+            ANSWER: We have that handy method that we love so much, in our application controller, that current_user method. Where we are going to be able to acess the specific object, the user object, and pull out their ID and then set it to our link as their forum key because the current_user is the only one who's actually creating a link at the time of this request being fired, so we know indeed this is the correct user and this will then be the correct user_id
+
+            So, if we are indeed able to save that link and everything else has been input correctly, we want to do something specific, we want to redirect to that link. So, we can go ahead and use Rails's redirect_to and rails will pass it this link_url(@link) and pass it this object so that Rails can actually pull out the ID that has been saved and redirect directly to that show page
+
+            However, if it does not work and does not save, we will go ahead and render those errors because our validations will have given those errors and we want to redirect_to links_url  
+              if @link.save
+                redirect_to link_url(@link)
+              else
+                flash.now[:errors] = @link.errors.full_message
+                render :new
+              end
+
+    update 
+      @link = current_user.links.find(params[:id])
+        We want to go ahead and find a particular set of links, we want to make sure that the only links that user can really interact with are their own. So, how might we specify that link is indeed theirs?
+          ANSWER: We can use, your favorite method, current_user.links and that will give us through our assoications that we built way way long ago, that will give us access to the current_user's links.find
+
+          Then we want to pass into it params[:id]. Now what we want to do is find that link based off the current_user to ensure that only the current_user is able to find their links, not be able to edit or update anybody else's and nobody can find their links because again, they will only be looking at their own links
+
+      if @link.update_attributes(link_params)
+        redirect_to link_url(@link)
+      else 
+        flash.now[:errors] = @link.errors.full_message
+        redirect_to :edit
+      end
+        Now we want to try and update this link. I want to pass in link_params. If this indeed works we want to do what?
+          ANSWER: Look at the specs to see what they want you to do, which say: when logged in they do not care where we send them, they just do want somebody to update somebody else's links. So, we will redirect_to link_url(@link) and pass in link
+
+          So, if you are able to update it, we will show you your handywork and if not,x we will flash them those errors and we also want to go ahead and say redirect_to :edit
+            flash.now[:errors] = @link.errors.full_message
+            redirect_to :edit
+
+        Now run rspec and go back to SessionController to uncomment 
+
+    edit
+      @link = Link.find(params[:id])
+        Look at rspec 
+
+    destroy
+
+    private, link_params
+      Always the same basic structure
+
+    Creates templets for links
+      Go to views --> links and create new.html.erb, edit.html.erb, show.html.erb and because we want to see a specific link, we probably need an index.html.erb
+
+  CommentsController
+    rails g controller Comments  
+      Run rspec and notice that the comments route is actually nested underneith the links route /links/1/comments to/from. Now it says specifically POST, right, but we do not actually know. 
+      
+    Let's make those routes in routes.rb
+      resources :links do 
+        resources :comments, only: [:create, :destory]
+          
+        That means wer are going to go ahead and nest them, and based off of the specs, we only care about :create and :destroy
+
+    Make your new.html.erb in views --> comments 
+ 
+    Now move onto CommentsController
+      Create skeleton for :create, :destroy, fully build comment_params and pass in what ever is necessary to create a new instance ( :body ). Then looking at the rspec, you will notice that inside those spec files that were not allowing functionality, if indeed somebody was not logged in. 
+        before_action :require_login
+
+      create
+        Start first part
+          @comment = Comment.new(comment_params)
+
+        Now do second part
+          @comment.user_id = current_user.id  
+            When you are logged in, but you have invalid params, we need to flash some errors. What do we know that comment needs in order to get saved?
+              ANSWER: Like before, needs a user_id 
+
+        Here is the third part
+          @comment.link_id = params[:link_id]
+            Now what else do we know that this comment will need?
+              ANSWER: How about a link_id. How might we get this link_id?
+                ANSWER: The key is in the routes.rb file. So, we have nested our comments create and destroy route, underneith this links. What does that mean for us?
+                  ANSWER: That means that, when we want to navigate or make a request to this particular create action here, we are going to have access to the specific link that this comment sort of corresponds to, and we can see, what that looks like by looking at the rspec in POST#create /links/1/comments
+
+                  So, this is a snapshot of what those params will look like. So, we have links and this link_id, and that's corresponding to the specific link that they are trying to look at the comments for. That means we can go ahead and say
+                    params[:link_id]
+
+                  To see where this specifically comes from we can run rails routes and see that in that nested route we have this wild card. Where we have link_comment that is destroying, link_comments that is post, and we see here this link_id is indeed nested, and that it is actually the key in our params hash that we are looking for. So, this corresponds specifically to the key in ouor params hash 
+
+                  link_comments POST   /links/:link_id/comments(.:format)     comments#create
+                  link_comment DELETE /links/:link_id/comments/:id(.:format) comments#destroy
+
+                  So, we are assuming that ID can get feed and run in here, and then what?
+                    ANSWER:
+                      If indeed we have all that stuff, we wanna save
+                        @comment.save
+                      If not, we want to, you guessed it        
+                        flash.now[:error] = @comment.errors.full_messages   
+
+                  Now, run rspec to find out where we are supposed to redirect_to the link_url(@comment.link_id) page. How do we get the link_id? 
+                    ANSWER: Well, we still got it. So that should give us link_id, because again, this links_url requires that link_id in order to know where exactly to navigate to. Make sure to read the rspec and read what it actually says  
+                      redirect_to link_url(@comment.link_id)
+
+      destroy
+        DELETE destroy when logged out redirects to the login page. For some reason, it cannot find those routes, why can it not find those routes?
+          ANSWER: We can look at the params. 
+            It just says params: (id: comment.id), I do not see any mention of a link there. So, it looks like it actually does not want the destroy nested in the routes.rb file under links. 
+
+            It wants destroy on it's own line, free 
+                resources :links do
+                  resources :comments, only: [:create]
+                end 
+
+                resources :comments, only: [:destroy]
+
+        So, what do we want to do here?
+          ANSWER: We want to go ahead and find a comment, and again we know we are going to get this (params[:id]) from the specs here. We can see actually it says params: (id) will be the comment.id, hense the ID will be the comment.id
+            params: { id: comment.id } 
+
+        What do we want to do with that information? 
+          ANSWER: It is in our destroy action, so let us destroy
+            @comment.destroy
+
+        Last thing, we want to redirect to where? Where does it say in the spec? It says: We want to redirect back to the link
+          redirect_to link_url(@comment.link_id)   

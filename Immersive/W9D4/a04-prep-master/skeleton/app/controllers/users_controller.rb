@@ -4,11 +4,13 @@ class UsersController < ApplicationController
   end 
 
   def create
+    @user = User.new(user_params)
     if @user.save
       login(@user)
-      # redirect_to links_url
+      redirect_to links_url
     else  
-      flash.now[:errors] = @users.errors.full_messages
+      flash.now[:errors] = @user.errors.full_messages
+      render :new 
     end  
   end 
 

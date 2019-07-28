@@ -1,1 +1,9 @@
 <%# "links show" %>
+<h2>Link Show</h2>
+
+<%= @link.user.username %>
+<%= @link.title %>
+<%= @link.url %>
+
+<a href="<%= links_url %>">Links</a>
+<a href="<%= edit_link_url %>">Edit Link</a>

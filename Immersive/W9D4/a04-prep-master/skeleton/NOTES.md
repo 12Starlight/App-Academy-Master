@@ -724,7 +724,7 @@ However, it makes more sense to put it in our application.html.erb file because 
 So, let us think about, where do we even keep our errors? 
   ANSWER: We keep those in our flash hash. So, if we have errors in there, we want to render those errors. So, let us go ahead and say we have a UL and let us render these errors as LI's 
 
-  So, we will go ahead and say, if indeed there are errors, we will hop inside of the UL <% flash[:errors] do |error| %> Inside of this loop we want to create an LI and inside of this LI, we want it to be the actual error <li><%= error %><li>
+  So, we will go ahead and say, if indeed there are errors, we will hop inside of the UL <% flash[:errors] do |error| %> Inside of this loop we want to create an LI and inside of this LI, we want it to be the actual error li <%= error %> li
 
   What this is saying is if indeed there is even a key of errors, if that exists, we want to go ahead and iterate over it because we are expecting it to be an array. Which we want to render each error that is in that array. 
 
@@ -739,4 +739,69 @@ So, let us think about, where do we even keep our errors?
     <% end %>
 
 Now run the rspec and then open up the links show and links index. So, it kinda looks like, it is just not seeing anything. So, let us go ahead and code up our show and index pages. 
+
+  First make an h2 Links Index and it says in the spec folder that it has a 'New Link' link to a new link page. So let us make an a tag and we are going to now look at rails routes. 
+
+  When we want to go to that new link page this will get us there
+    --> new_link <-- GET /links/new(.:format) links#new
+
+  So, inside of ERB we want to put in new_link_url and we want this to say New Link. 
+  
+    <a href="<%= new_link_url %>"New Link<a>   
+  
+
+  It wants us to see all of the links also, we have @links instance variable that is created for us inside of our links controller and we can probably assume that @links equals link.all. 
+
+  We do not have to assume though, we can just look back at our LinksController, but more or less, this will give us all the links. So, if we iterate over this right, and say @links.each do |link|, what do we wanna do?
+    ANSWER: For each link we have, we want to render some stuff. Looking at the spec file, notice 'links to each of the link's show page via link title'. So, inside of the loop, we want another a tag.
+
+    We are going to go ahead and say, we want this to go to a specific links show page with href="link_url(link). So, to double check we look at rails route
+      Look at rails route:
+        link GET /links/:id(.:format) links#show
+
+    Which as we see, that will get us a specific route for a specific link and that is what we have here, cool. Now it wants it to be 'links to each of the links show page via link titles'
+
+    So, here what we will need to do is ><%= link.title %><. So, now that should give us the link title, and we will be able to click that link title to get to that link show page
+
+    Now, we want to add the URL, let us go ahead and list that inside of our loop too. First we want to put it inside of an LI and say <li><%= link.url %></li> which should give us the URL for this particular link. Then wrap the previous a tag in an LI as well. Now because we have these LI's go ahead and wrap the entire each loop in a UL 
+      <ul>
+      <% @links.each do |link| %>
+        <li><a href="<%= link_url(link)%>"></a><%= link.title %></li>
+        <li><%= link.url %></li>
+      <% end %>
+      </ul>
+    
+  Now looking at the spec file, what else do we need?
+    ANSWER: Go to our show page
+
+In our show page, we want to make another h2 and call it Link Show. What else do we want to show?
+  ANSWER: In the spec file it says, 'shows the link's author'
+
+So, we have access to our @link again, from our controller. So we say in ERB @link.user, because that is the name of our association, and .user.username. Then it wants @link.title and @link.url. The spec file wants all that stuff, it also says that it displays a link back to the links index titled links. 
+  <%= @link.user.username %>
+  <%= @link.title %>
+  <%= @link.url %>
+
+Let us go ahead and make another a tag which we will call links, and now let us look at rails routes. It says, when we want to get to our links index we want to use this one right here
+  Look at rails route:
+     --> links <-- GET /links(.:format) links#index
+
+So, links_url looks like it should work and agian let us not forget, we want this to be inside of ERB
+  a href="<%= links_url %>">Links a
+
+It also says, it has a link on the show page to edit a link. Pretty straight forward. We know there there is going to be a link passed in and in this case we have access to that. According to the spec file we want it to say Edit Link. now let us double check rails routes
+  Look at rails route:
+    --> edit_link <-- GET /links/:id/edit(.:format) links#edit
+
+Looing at the route, we can see that it is going to be edit_link URL, not links URL. That now looks awesome! Good job :D !!!! Almost done
+  a href="<%= edit_link_url %>">Edit LInk a 
+
+Now run the rspec, now it is not likeing edit_url. It gave us that little hint, it said 'links controller'. So, go ahead and open up your LinksController. Let us see what we are missing. 
+
+Let us go down to our update and notice that here we are trying to redirect to edit. There was no spec for it, but using our deductive skills and our ability to read specs, we are able now to track this error here which says LinksController. Now this might have been an easy one, but it says also here links controller rb 34 in update. 
+    # ./app/controllers/links_controller.rb:34:in `update'
+
+After going back there, we found that we had a redirect to the template edit. That is not taking us anywhere that we want. What we want it to say is edit link. That is the actual template we want it to go. 
+
+However, when we are doing that, we want to make sure that those errors are going to go along through that cycle. So, because we are no longer rendering, we do not want to use flash.now, we just want to use straight flash errors. Now run the rspec
 

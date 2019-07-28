@@ -30,8 +30,8 @@ class LinksController < ApplicationController
     if @link.update_attributes(link_params)
       redirect_to link_url(@link)
     else
-      flash.now[:errors] = @link.errors.full_messages
-      redirect_to :edit 
+      flash[:errors] = @link.errors.full_messages
+      redirect_to :edit_link
     end
   end 
 

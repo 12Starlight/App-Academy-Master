@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
       login(user)
       redirect_to links_url
     else  
-      flash.now[:errors] = "NO GO on the username"
+      flash.now[:errors] = ["Username and Password not valid!"]
       render :new
     end 
   end 

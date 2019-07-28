@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id 
     @comment.link_id = params[:link_id]
     @comment.save 
-    flash.now[:errors] = @comment.errors.full_messages
+    flash[:errors] = @comment.errors.full_messages
     redirect_to link_url(@comment.link_id)
   end 
 

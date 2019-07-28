@@ -805,3 +805,80 @@
 
     However, when we are doing that, we want to make sure that those errors are going to go along through that cycle. So, because we are no longer rendering, we do not want to use flash.now, we just want to use straight flash errors. Now run the rspec
 
+## Twelfth build comments using --> views --> show
+    Looking at the features --> comments_spec file, it says we should be able to add some comments and we should be able to delete some comments. It also says there is an add comment form on the link show page. So, okay, this means we are not going to need our own template for the comments. 
+
+    We are just sort of going to piggy back on a template we have already done. So that means that we are going to go to the show first.
+
+    We can go ahead and work on everything below the previous code. Do not need to worry about it too much, just make an h3 and call it comment. 
+      <h3>Comment<h3>
+
+    The spec says we want to add comments to links, and there is an add comment form on the link show page. So, we want to make a form. What do we want to do here?
+      ANSWER: If we are trying to make a new comment, that is going to be a post request. But, how might we make a new comment?
+        ANSWER: Your first thought might be the same way we have made new links, new users, new sessions, sort of like that links URL. But, if we take a look at our rails routes, we see here that we have nested the comments under or link. 
+        --> link_comments POST /links/:link_id/comments(.:format) comments#create
+
+        So, if want to make this create request, we have to use a very specific syntax, link_comments and it is going to want a link ID. We did this in the very beginning in our routes file.  
+
+    So, we are going to make it action="<%= link_comments_url(@link) %>", but it is going to be taking in that link object. This link object is available to us here which is another reason for keeping this form inside of the link show. This means we have access to this @links instance variable. As always, we want to make type="hidden", name="authenticity_token" and value="<%= form_authenticity_token%>"
+
+    Next, in our form we want to add a label and inside the label we want to add the feild body. This is followed by an input tag with type="text" and name="comment[body]" with a value=""
+
+    Finally, we want to make a button using input with type="submit" and then a value="Add Comment" according to the spec file. 
+
+    Looking at the spec file, it also says it wants us to delete some comments by 'displays a remove button next to each comment' and it wants the button to be called 'Remove Comment'
+
+      So, because it said each, let us assume that there is some sort of iteration happening. So, how might we get the comments that should be on this page?
+        ANSWER: Well, we still have access to this instance variable @link and because of our associations, we have access to all the comments that correspond to this link
+
+        Let us go ahead and say <%@link.comments.each do |comment| %> and inside of the loop, now that we have each indiviual link, we want to go ahead and display that link. So, let us go ahead and wrap this again inside of a UL 
+
+        Now that we have this @link.comments.each do block, what do we want to do with each comment?
+          ANSWER: We want to say, for each comment, we want to show the comment.body which we will wrap in an li of course. Now each one of these will get rendered
+
+        Now we also want one more thing, the real reason we are doing all this is because we are going to need a remove button which means we need another form. 
+
+        Let us check our routes one last time. When we want to delete a comment, right, this is not nested. We had that issue earlier in our controllers. But, this is a standard syntax for this action. Just comment and we want to pass in the specific ID
+          Look at rails route:
+            --> comment <-- DELETE /comments/:id(.:format) comments#destroy
+
+        So, again we will just do ERB, comment_url(comment) and we will pass in the comment. As before we want to add input type="hidden", name="authenticity_token" and value="<%= form_authenticity_token %>"  
+
+        The last thing we need because we are not making it a post request, we need one more hidden input with value="delete". This is because we want to delete that instance. Last, but not least, we want to add a button using input type="submit" and value="Remove Comment" according to the spec file. 
+          <h3>Comment</h3>
+
+          <form action="<%= link_comments_url(@link) %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <label>
+              Body
+              <input type="text" name="comment[body]" value="">  
+            </label>
+            <input type="submit" name="" value="Add Comment">
+          </form>
+
+          <ul>
+            <% @link.comment.each do |comment| %>
+              <li><%= comment.body %></li>
+              <form action="<%= comment_url(comment) %>" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <input type="hidden" name="_method" value="delete">
+                <input type="submit" name="" value="Remove Comment">
+              </form>
+            <% end %>
+          </ul>
+
+        Now run the rspec, and looks like it did not want body. It wanted comment. So, it says there is an "Add Comment" on the Link Show page. It also, says that it validates presence of comment body. 
+
+        So, it looks like we need to say "Add Comment" somewhere, so we will change our h3 Comment to Add Comment. After, it looks like we are still failing validates presence of comment body. So, we have one more place we can go.
+
+        Just like we did with our links controller anytime we are working with the views, it is cautioned, if you are working with an error, do not try and errase all the views you have. Instead, go and check out the comments controller or the controller that corresponds to whatever view you are working on. Maybe you missed something. 
+
+        So, in this case, right here we found a simple error. Again, we did flash.now before, but because we are redirecting this flash needs to exist for more than just that instantaneous render. It needs to exist for that full response cycle. Flash errors is going to keep these errors around for us long enough for them to get rendered to the front end.
+
+        Just to double check. Run the entire rspec because sometimes when you change some things around in one file, it might break something somewhere else. So here we see one more error, undefined method 'each' for 'No GO on the username and password' string.
+
+        If you remember way back when, we coded that up probably in our user's controller. Nope, looks like it is our sessions controller. Again, when we wrote this, we were hoping the spec would give us specific for what they want us to say. It looks like they still do not care what it says. They simply want it to be iterated over.
+
+        Let us change this to an array and to something, that is perhaps something that is a bit more normal. If we are trying to create a session, we will say username and password not valid.  
+
+        Pretty sweet! :D  

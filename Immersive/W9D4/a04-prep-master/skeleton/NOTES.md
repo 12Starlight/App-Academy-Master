@@ -640,5 +640,103 @@
 ## Eleventh build views --> links --> new     
   Look at the specs, we need a new link page that takes a title and URL. So, we are going to need a form again. Then redirects to the link show page upon success. That gets handled by our controllers. We are going to render some errors and display the new link form, if we failed. The form needs to be prefilled. We also see, that we have some index information, some show and edit as well. 
 
-  We can see right away there is going to be a form for the edit, and probably a form for the link, for creating a link, that is probably our new template. So, now we need to go ahead and make a partial. This will make our code DRY to save us some work. Go to views --> links --> new
+  We can see right away there is going to be a form for the edit, and probably a form for the link, for creating a link, that is probably our new template. So, now we need to go ahead and make a partial. This will make our code DRY to save us some work. Go to views --> links --> new and then also edit for links. 
+
+  What we want to do here is create a form unltimately, and we want to create a template. So, we want to create a partial that we can leverage to keep our code a bit drier, if we are going to be reusing the same stuff. Create a new template in views --> links --> _form.html.erb 
+
+  We want to wait on the _form.html.erb for now, and start at links new. Then let us make an h2 and say new link
+    <h2>New Link</h2>
+
+  Then make a form and we want to dynamically pass in what this action will be which we will worry about later. Next we need an input with type="hidden" and name="authenticity_token" then value="<%= form_authenticity_token %>". Make sure you have the ERB tags for all this stuff. Also, make sure there are no spaces either because it will lead to annoying errors. 
+  
+  After we need our label, just like we did for our users. A link is going to have a title and a URL. Look at the spec file and notice that 'Capybara' has URL all capitalized. In our database it will be a lowercase url. However, when me make this label later on, we want to make sure we use capital URL. 
+
+  So, in our form for Title, we want type="text", name="link[title]" and value="link.title"
+
+  Next, in our form for URL (notice it is capital), we want type="text", name="link[url]" and value="link.url". Notice that the url in the code are still lowercase.  
     
+    <form action="<%= action %>" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+      <label>
+        Title 
+        <input type="text" name="link[title]" value="<%= link.title %>">
+      </label>
+
+      <label>
+        URL
+        <input type="text" name="link[url]" value="<%= link.url %>">
+      </label>
+
+      <input type="text" name="" value="<%= button_text %>">
+    </form>
+
+  For the link.url you might be wondering where is this comming from, well we are going to go ahead and write some code logic above our partial once we get there. Then we are going to incorporate some extra variables in that logic. This link however, will be comming ultimately from the original template that gets rendered. 
+
+  So, in this case, if we are navagating to the new link form, this link will come later on as we will see, from the at link that is going to be available here in this link template. This will be set, once we do that render function. But, again just recognize that link.title and link.url is going to be a variable and as such, we want to make sure that we use this ERB tag here around link.title and link.url 
+
+  Let us not forget anytime we need a forom we are going to need a submit button which we will call "<%= button_text %>". We are calling it button_text and wrapping it inside of an ERB tag, because we want it to change depending on what type of template this form is being rendered into.  
+
+  That means that, just because we go to the new link page one time, we do not want this text to always be "create new link". We want it at some point to be able to say "update link", "click link", "click button" etc. So, sometimes this will say update link, sometimes it will say new link or something else. So, button_text has to change dynamically. 
+
+  One last thing we are going to need to do. Maybe if we have an edit, we do not want that to be a post. So edit is going to go to a specific update action that is going to require an update. As opposed to a post, instead we are going to need a patch. 
+
+  As a result we need to build some logic above our form at the top of the page. If type is equal == to :edit, we want to do something specific. We want to add a hidden input with name="_method" and a value="patch" This makes sure we add the correct action rather than making a post by default, if the form is comming from our edit template
+    
+    <% if type == :edit %>
+      <input type="hidden" name="_method" value="patch">
+    <% end %>
+
+  Now take everything we did in the links new file and transfer it over to the form file. Now that we are in here, let us go ahead and do a little bit of that logic that we were talking about earlier. 
+
+  So, if type equals == :new, then we want to do something. Look in rails routes. So, if this is new we want action = links_url and button_text to say "Create New Link". 
+    
+    Looking at our routes: if we want to go to the new form, we want that action not to be new link. Instead, we want that post action. We want to actually create that link. So, we are going to need this to be our action in that case.
+        --> links <-- GET /links(.:format) links#index
+
+    So here we will say, if it is indeed new, we will say this will be links URL
+  
+
+  If we are trying to edit something, then we want action = link_url and button_text to say "Update Link"   
+
+    Looking at our routes: 
+      edit_link GET /links/:id/edit(.:format) links#edit
+
+      We do not want this one, this is the actual template, that is the actual page. We are getting that template to fill out the form. Instead we want to make this patch
+
+    Looking at our routes:  
+      --> PATCH <-- /links/:id(.:format) links#update
+
+      Just the update, so here we are just going to defer it to link. However, let us take note, that it does need this ID links/:id which we can pass it by just saying link_url(link). This link again, like we mentioned before with link.title and link.url will be coming from the actual file that we are rendering this template from.  
+
+So, now let us code that out. First, go to links new and delete everything. We do not need that anymore, all we need is h2 New Link, and inside the ERB render 'form', then we will say type: :new that will correspond to new, because we are in our new link template. We also, want to go ahead and specify a link. In this case it will correspond with the instance variable @link that we set up in our controller
+  <% render 'form', type: :new, @link %>
+
+Next we want to do something very similar in links edit. Make an h2 Edit Link, so we know and we will add that render statement. Instead of new, this will just be edit 
+  <% render 'form', type: :edit, @link %>
+
+Now let us look at the rspec. So, it talks about displaying and rendering some errors, alright let us code that. We know that our new form, and edit form might have some errors. We do not want to write that in two different places. We could write that in our partial. 
+
+However, it makes more sense to put it in our application.html.erb file because a user might have typed in the wrong password when loggin in and we want to make sure we can get that user the correct errors that they need. This will make it available in the rest of our templates. 
+
+  Similarly to how we did this with the current_user.username we can make sure that we render the appropriate errors.
+
+So, let us think about, where do we even keep our errors? 
+  ANSWER: We keep those in our flash hash. So, if we have errors in there, we want to render those errors. So, let us go ahead and say we have a UL and let us render these errors as LI's 
+
+  So, we will go ahead and say, if indeed there are errors, we will hop inside of the UL <% flash[:errors] do |error| %> Inside of this loop we want to create an LI and inside of this LI, we want it to be the actual error <li><%= error %><li>
+
+  What this is saying is if indeed there is even a key of errors, if that exists, we want to go ahead and iterate over it because we are expecting it to be an array. Which we want to render each error that is in that array. 
+
+  This allow us to not have to write this code anywehere else and will render errors for the user. 
+    
+    <% if flash[:errors] %>
+      <ul>
+      <% flash[:errors].each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+      </ul>
+    <% end %>
+
+Now run the rspec and then open up the links show and links index. So, it kinda looks like, it is just not seeing anything. So, let us go ahead and code up our show and index pages. 
+

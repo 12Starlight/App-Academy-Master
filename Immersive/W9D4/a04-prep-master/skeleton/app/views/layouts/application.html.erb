@@ -23,6 +23,14 @@
       <a href="<%= new_user_url %>">Sign Up</a>
     <% end %>
 
+    <% if flash[:errors] %>
+      <ul>
+      <% flash[:errors].each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+      </ul>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

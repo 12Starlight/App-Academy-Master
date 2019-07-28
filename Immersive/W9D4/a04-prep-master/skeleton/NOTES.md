@@ -243,7 +243,7 @@
 
 ## Eigth build controllers
   rails g controller Users   
-    Creates that users_controller file and a directory in our views folder for the templets, where our templets will go. 
+    Creates that users_controller file and a directory in our views folder for the template, where our template will go. 
   
   rails g controller Sessions
     Our user auth pattern relys not only on a user, but also a session controller. We make it plural by convention and also, we want to make sure it can handle all of the sessions that are going to be created and not just the sessions for that one user which in routes is the case. The user is only ever able to influence their individual session
@@ -426,7 +426,7 @@
     private, link_params
       Always the same basic structure
 
-    Creates templets for links
+    Creates template for links
       Go to views --> links and create new.html.erb, edit.html.erb, show.html.erb and because we want to see a specific link, we probably need an index.html.erb
 
   CommentsController
@@ -501,4 +501,144 @@
             @comment.destroy
 
         Last thing, we want to redirect to where? Where does it say in the spec? It says: We want to redirect back to the link
-          redirect_to link_url(@comment.link_id)   
+          redirect_to link_url(@comment.link_id)    
+
+## Ninth build views --> sessions --> new
+  First write out the helper methods in ApplicationController at the top of the file
+    helper_method :current_user, :logger_in?
+      We want to make these methods available to us in our views on our front end. So, we want to be able to conditionally render and do some certain things. Now we will be able to call these methods in our views template. This will allow us to check is the person logged in and who is the current user at this particular time. Maybe we want some of this information, maybe we will want it in our views. We will see how this plays out later. Now run the rspec
+        NOTICE:
+          There is going to be a sign up and sign in page, but only a sign out button. That is a good sign we will probably need to make a templet for sign up and sign out. 
+
+          We can think of sign up as when a user wants to create a new user. When someone wants to create a new user, create a new instance in our database for that user. That is going to be a user page. So, that is going to be a new user. 
+
+          And we can think here, that is when we have this sign in, that is when someone wants to create a session. We want to create a link between an existing user and the browser and make that session happen. In order to do that, we will probably be using our SessionController which is our new session templet there.   
+      
+  Next inside of the template for links/name put "links edit", and the name like that for all the template just so we can reference them later on. Then open up the "session new" and "user new" that we want to start with. 
+
+  In the readme, notice that it says we need to make sure we spell everything with the correct capitalization because it uses 'Capybara' which is strict about that. This also, includes naming conventions. 
+
+  When you open up spec --> features --> auth_spec.rb we can already see that it is asking us: 
+        expect(page).to have_content 'Sign Up'
+
+        expect(page).to have_content 'Username'
+        expect(page).to have_content 'Password'
+
+  That is a good indicator to us, that 'Capybara' is going to be looking for very specific strings, in the case, capital sign up, etc. That means that when we are over here and we are making our template. That we are going to make sure that our naming convention, matches exactly what 'Capybara' says. 
+
+  Start with "session new". This is where we want to create a new session, we can think of that as when we are signing in.
+    <h2>Sign In</h2>
+
+  Now we are going to likely need some sort of form
+    <form class="" action="index.html" method="post">
+
+    </form>
+
+  This form is going to be how we going to allow the user to pass in certain information and they are going to hopefully send that information down to our controller. It is going to evaluate that information and either log the user in or not log them in. 
+
+    First do not worry about class="", the action="" is the important stuff where we are going to use ERB <%= %> and we want this to make a specific action
+      Go back to the terminal and look at the rspec. Then run rails routes. This is going to be very useful for this part where we want to always use as a reference. Do not focus on remembering them, just use them as a reference
+
+      So, if we want to create a new session, that means we are already going to be on this templet. That is the templet we are currently writing code in and that is what the user is going to see. Where hopefully there will be some sort of form there and they will be able input what ever credentials they have and then try and actually create a session.
+         new_session GET  /session/new(.:format)  sessions#new
+
+      So, the keyword create down here is the actual action that we want to send with this information that we are sending down. That means we will need this specific prefix here, this session prefix
+          POST  /session(.:format)  sessions#create
+
+          Prefix 
+          --> session <-- DELETE  /session(.:format) sessions#destroy
+
+      So, we will just write in here, the session_url
+        action="<%= session_url %>"
+
+      And that means that now, we will be able to send the correct information, in this form to the correct location. What we also need, anytime we are going to have a form is this authenticity token. Rails has a nice easy method that we can call form_authenticity_token
+        <input type="hidden" name="authenticity_token" value="<%=  form_authenticity_token %>">
+
+      This is going to allow us to make requests to our database from this templet and all the while, our rails back end is going to be protecting us from CSRF attacks. This is going to allow us to actually get past that and make the appropriate requests 
+
+      Now that we have that form in there, we want to make a couple other input requests. It says we are looking for username and password. 'Capybara' is specific, so we will go ahead and use the lable and make it Username with the same capitalization conventions
+        <label>
+          Username 
+          <input type="text" name="user[username]" value="">
+        </label>
+
+      Then we will put our input and we will say, type="text" and here is where we will use the conventions that we set up inside of our user params method. Here we are going to require a key of user inside of our user params, so that will ensure that there is a key of user sent down. Inside that key of user, that is pointing to another object or another Ruby hash that has a key of username inside of that. So, this will ensure that we have the appropriate nesting. So, that whatever information we input in the input text box, will get sent in the params under the appropriate nesting. 
+        name="user[username]" 
+
+      So, we can use this label convention to make another one real fast. This one we will call password. You need a password to log in. Then change username to password    
+        <label>
+          Password 
+          <input type="text" name="user[password]" value="">
+        </label>   
+
+      One thing we definitely can not forget, any form we need to have a way to submit that form. So, we are going to make a button here for ourself. This button is going to fire off to <%= session_url %> as a specific action. The value is whatever text we want to be shown on that button. We will put sign in because we are on the sign in page
+        <input type="submit" name="" value="Sign In">
+
+## Tenth build views --> users --> new
+  We want to do something very similar. Open up the templet on the other side of the screen to have as a nice refrence. We want to go ahead and call this sign up. We want our action to be something else. Run rails routes and see what it shows.
+
+  When we are trying to sign up a user, we are creating a new user. This post right here, will allow us to create a new user. 
+    users POST /users(.:format) users#create
+
+  Again we will be making this templet right now. We want to fire this request to our database, users new is getting that templet for us and then we are posting the information using the above create action    
+    new_user GET  /users/new(.:format)  users#new
+
+  So, again prefix users, let us go ahead and add that in here, and do not forget we need ERB, <%= users_url %> and that's a post again method="post". We will use the same authenticity token. Then use the same lables and change the value="Sign Up"
+    --> users <-- POST  /users(.:format)  users#create
+
+  Now, look at the rspec, notice it does want us to have this sign out button. Then the user is redirected to the login form. Hymmm, where can we put this button where we might be able to access it?
+    ANSWER: Let us go ahead quickly and look at our application html.erb and we can see here in the specs it is telling us to add username to:
+      views --> layouts --> application.html.erb layout. 
+
+  So, what exactly are we going to do here, what is application.html.erb doing for us?
+    ANSWER: Well, it is going to work for us in a similar way to how our ApplicationController works. We are going to be able to add html in here that we want shared with the rest of the template depending on which templet gets rendered. This yeild block <%= yield %> right here is actually what is rendering these template 
+
+    So, when we go to the edit or the new, it is going to get passed in through here. So, all that code we wrote inside of like one of these template, that is going to go ahead and get passed through here. Then all this other stuff is also going to get rendered every single time we are navigating to a specific template 
+
+    That means that, if we in here wanted to add some logic, we can say if logged in, we want to go ahead and show current_user.username, using that method that we gave ourselves access to from our ApplicationController. That spec is specifically tring to get us to show the current user and that current user's username.
+      <% if logged_in? %>
+        <% current_user.username %>
+      <% else %>
+
+      <% end %>
+
+    So, we can think to some of the other websites we might be familiar with. If someone is logged in, something that might be likely to have always available to them on the browser or whatever page they are on is a log out button. Similarly, if a user is not logged in, they should be able to sign up or have a log in button.   
+
+    We can actually code this up to match some of the other apps that we are more familiar with. So, because it is asking specifically for a sign out button, that does mean we are going to need another form. Forms are something you want to practice until they become familiar. 
+    
+    This is action is what? If we want to sign out, what kind of action might we need? 
+      ANSWER: So, that is interacting with our session. We are trying to sever that connection between our user and the browser. We can look right here at this delete in rails routes  
+         session DELETE /session(.:format) sessions#destroy
+
+    So, this destroy controller action is what we want and we can get to that using this specific session prefix. So we will go ahead and inside of ERB, say session_url. And if indeed, we make that, we are going to need this other input type="hidden" name="authenticity_token" and value="<%= form_authenticity_token %>"  
+
+    Now we also need something else, because we are making a type of request that is not going to be a post. We need to specifiy, agian with another hidden input, that this is going to be something differnt. In this case we want it to be delete.  
+
+    Last, but not least. We want to put an input type="submit" which is titled value="Sign Out" because it says in the rspec that is what it is supposed to be called
+      
+      <form action="<% session_url %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="delete">
+
+        <input type="submit" name="" value="Sign Out">
+      </form>
+
+    Now we want to code up this else, where we want to say if a user is not logged in, let us take them to the login page. Let us take them to a create new user page. So, let us make an anchor tag and inside of here, using ERB again, we want to go to a specific link when we want to sign in or, if we are trying to sign up.  
+      <a href="<%=%>">Sign In</a>
+      <a href="<%=%>">Sign Up</a>
+
+    So, where might we need to go to if we are trying to sign in?
+      ANSWER: Checking rails routes, signing in is going to create a new session and signing up is trying to create a new user. So, these two templates, this new session and new user, those are actually where we want to go 
+        --> new_user <-- GET  /users/new(.:format)  users#new
+        --> new_session <-- GET /session/new(.:format)  sessions#new
+
+      <a href="<%= new_session_url %>">Sign In</a>
+      <a href="<%= new_user_url %>">Sign Up</a>
+
+    So, now you have new_session_url and new_user_url, correctly mapped to what 'Capybara' will be looking for. Go ahead and run the rspec 
+
+## Eleventh build views --> links --> new     
+  Look at the specs, we need a new link page that takes a title and URL. So, we are going to need a form again. Then redirects to the link show page upon success. That gets handled by our controllers. We are going to render some errors and display the new link form, if we failed. The form needs to be prefilled. We also see, that we have some index information, some show and edit as well. 
+
+  We can see right away there is going to be a form for the edit, and probably a form for the link, for creating a link, that is probably our new template. So, now we need to go ahead and make a partial. This will make our code DRY to save us some work. Go to views --> links --> new
+    

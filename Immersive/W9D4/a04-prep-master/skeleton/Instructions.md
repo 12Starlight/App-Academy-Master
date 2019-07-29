@@ -608,3 +608,7 @@
         </form>
       <% end %>
     </ul>
+
+## Practice 5 times with instructions
+## Practice 5 times keeping them nearby 
+## Practice 5 times without instructions

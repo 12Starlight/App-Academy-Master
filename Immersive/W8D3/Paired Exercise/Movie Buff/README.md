@@ -1,0 +1,1 @@
+Actor.joins(:movies).group('actors.id').order('COUNT(movies.id) DESC').limit(1)

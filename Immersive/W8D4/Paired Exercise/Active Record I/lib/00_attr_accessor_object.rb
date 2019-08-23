@@ -11,7 +11,6 @@ class AttrAccessorObject
       define_method("#{name}=") do |arg|
         instance_variable_set("@#{name}", arg)
       end 
-
     end
   end
 end

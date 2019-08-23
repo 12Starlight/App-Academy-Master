@@ -1,5 +1,4 @@
 class AttrAccessorObject
-  
   def self.my_attr_accessor(*names)
     # getter method
     names.each do |name|

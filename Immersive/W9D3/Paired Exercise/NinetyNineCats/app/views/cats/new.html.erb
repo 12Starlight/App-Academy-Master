@@ -1,0 +1,27 @@
+<h1> Cat New </h1>
+
+<form action=" <%= cats_url %> " method="POST"> 
+
+
+  <label>Name
+    <input type="text" name="cat[name]" value="<%= @cat.name %>">
+  </label>
+  
+  <label> Sex
+    Male:
+    <input type="radio" name="cat[sex]" value="M">
+
+    Female:
+    <input type="radio" name="cat[sex]" value="F">
+  </label>
+
+  <label> Color
+    <select name="cat[color]">
+      <% Cat::COLOR_ARRAY.each do |color| %>
+        <option value=<%=color%> > <%= color %> </option>
+      <% end %>
+    </select>
+  </label>
+
+
+</form>

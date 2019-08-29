@@ -1,0 +1,813 @@
+  [1m[35m (354.1ms)[0m  [1m[35mCREATE DATABASE "NinetyNineCats_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (268.0ms)[0m  [1m[35mCREATE DATABASE "NinetyNineCats_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (25.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4867400193759934845)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateCat (20190828202224)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (7.7ms)[0m  [1m[35mCREATE TABLE "cats" ("id" bigserial primary key, "birth_date" date NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190828202224_create_cat.rb:3
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_cats_on_birth_date" ON "cats"  ("birth_date")[0m
+  ↳ db/migrate/20190828202224_create_cat.rb:8
+  [1m[36mActiveRecord::SchemaMigration Create (3.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190828202224"]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (1.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-08-28 20:26:34.346215"], ["updated_at", "2019-08-28 20:26:34.346215"]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4867400193759934845)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/Wei/.rbenv/versions/2.5.1/bin/annotate:23
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4867400193759934845)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddColumns (20190828204442)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.5ms)[0m  [1m[35mALTER TABLE "cats" ADD "color" character varying NOT NULL[0m
+  ↳ db/migrate/20190828204442_add_columns.rb:3
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "cats" ADD "name" character varying NOT NULL[0m
+  ↳ db/migrate/20190828204442_add_columns.rb:4
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "cats" ADD "sex" character varying(1) NOT NULL[0m
+  ↳ db/migrate/20190828204442_add_columns.rb:5
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "cats" ADD "description" text NOT NULL[0m
+  ↳ db/migrate/20190828204442_add_columns.rb:6
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190828204442"]]
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (1.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(4867400193759934845)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/Wei/.rbenv/versions/2.5.1/bin/annotate:23
+Started GET "/" for ::1 at 2019-08-28 16:28:19 -0700
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/wei/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+Completed 406 Not Acceptable in 163ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::UnknownFormat - Rails::WelcomeController#index is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.:
+
+Started POST "/__better_errors/72eb1b1f16275785/variables" for ::1 at 2019-08-28 16:28:20 -0700
+Started GET "/cats/new" for ::1 at 2019-08-28 16:28:30 -0700
+Processing by CatsController#new as HTML
+  Rendering cats/new.html.erb within layouts/application
+  Rendered cats/new.html.erb within layouts/application (5.8ms)
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/new.html.erb:7:in `_app_views_cats_new_html_erb___813614648835144175_70098863901920'
+
+Started POST "/__better_errors/46fde463b2b7d27d/variables" for ::1 at 2019-08-28 16:28:30 -0700
+Started GET "/cats/index" for ::1 at 2019-08-28 16:28:38 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"index"}
+  [1m[36mCat Load (1.8ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 17ms (ActiveRecord: 8.9ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=index:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/e7d5ddf60015d13c/variables" for ::1 at 2019-08-28 16:28:38 -0700
+Started GET "/cats/index" for ::1 at 2019-08-28 16:32:43 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"index"}
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 1ms (ActiveRecord: 0.3ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=index:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/685fa7da2fc3b0b2/variables" for ::1 at 2019-08-28 16:32:43 -0700
+Started GET "/cats/" for ::1 at 2019-08-28 16:32:51 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  ↳ app/views/cats/index.html.erb:3
+  Rendered cats/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 729ms (Views: 728.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/cats/new" for ::1 at 2019-08-28 16:32:59 -0700
+Processing by CatsController#new as HTML
+  Rendering cats/new.html.erb within layouts/application
+  Rendered cats/new.html.erb within layouts/application (4.7ms)
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/new.html.erb:7:in `_app_views_cats_new_html_erb___813614648835144175_70098878524640'
+
+Started POST "/__better_errors/25150a39c60b3425/variables" for ::1 at 2019-08-28 16:32:59 -0700
+Started GET "/cats/show" for ::1 at 2019-08-28 16:33:03 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"show"}
+  [1m[36mCat Load (0.4ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 2ms (ActiveRecord: 0.4ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=show:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/453f16f45621832c/variables" for ::1 at 2019-08-28 16:33:03 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:33:12 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/a86d193dfde4a1e1/variables" for ::1 at 2019-08-28 16:33:12 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:34:11 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.4ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 3ms (ActiveRecord: 0.4ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/eec9baef6df122c4/variables" for ::1 at 2019-08-28 16:34:11 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:35:33 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.4ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 2ms (ActiveRecord: 0.4ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/98bc9608244833c6/variables" for ::1 at 2019-08-28 16:35:33 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:35:53 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (3.4ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb___2132636396317567271_70098864537320'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/abaf1580e86d36b5/variables" for ::1 at 2019-08-28 16:35:53 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:35:55 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (4.5ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb___2132636396317567271_70098855898960'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/ce4f483ef5a10240/variables" for ::1 at 2019-08-28 16:35:55 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:36:29 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (4.4ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb___2132636396317567271_70098855405400'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/8cfd38a21e5cba42/variables" for ::1 at 2019-08-28 16:36:29 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:36:30 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (3.3ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb___2132636396317567271_70098856078440'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/753724394d127f6f/variables" for ::1 at 2019-08-28 16:36:30 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:36:38 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (4.7ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb___2132636396317567271_70098856343620'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/bd637d783e2731e0/variables" for ::1 at 2019-08-28 16:36:38 -0700
+Started GET "/cats/5" for ::1 at 2019-08-28 16:36:55 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"5"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (3.2ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb___2132636396317567271_70098913992820'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/8a66e217606dbff9/variables" for ::1 at 2019-08-28 16:36:55 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:36:59 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (4.9ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb___2132636396317567271_70098914066320'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/d422a0805e85c9cd/variables" for ::1 at 2019-08-28 16:36:59 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:37:15 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (5.9ms)
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb___2132636396317567271_70098842553680'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/3e9a9fce65dd082c/variables" for ::1 at 2019-08-28 16:37:15 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:37:15 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (4.9ms)
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb___2132636396317567271_70098851925800'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/124dab6aff8c8ba6/variables" for ::1 at 2019-08-28 16:37:15 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:37:17 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (4.4ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb___2132636396317567271_70098866837180'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/43d81bd1beb51865/variables" for ::1 at 2019-08-28 16:37:17 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:38:09 -0700
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/wei/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (7.6ms)
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb__2928663630848334737_70292224809700'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/cadbd7fc25fa2a2f/variables" for ::1 at 2019-08-28 16:38:09 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:38:24 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 197ms (Views: 196.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/cats/1" for ::1 at 2019-08-28 16:38:43 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (3.3ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb__2928663630848334737_70292255768480'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/ac37e33a91c6e898/variables" for ::1 at 2019-08-28 16:38:44 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:40:12 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (3.2ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb__2928663630848334737_70292234380660'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/ed7fc8e4628b9bfa/variables" for ::1 at 2019-08-28 16:40:12 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:40:50 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (3.7ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb__2928663630848334737_70292234335920'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/40f8fd0037fca9de/variables" for ::1 at 2019-08-28 16:40:50 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:41:56 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (3.3ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb__2928663630848334737_70292226078380'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/8827aaaa58fd8e16/variables" for ::1 at 2019-08-28 16:41:56 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:42:36 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (4.0ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb__2928663630848334737_70292259746460'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/8e2e22e5bbd46b26/variables" for ::1 at 2019-08-28 16:42:37 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:42:38 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (4.4ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb__2928663630848334737_70292265322720'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/06ff3e90b3f61547/variables" for ::1 at 2019-08-28 16:42:38 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:42:42 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (3.7ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb__2928663630848334737_70292260369420'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/de418183dcdbdb49/variables" for ::1 at 2019-08-28 16:42:42 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:42:51 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (4.5ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `color' for nil:NilClass:
+  app/views/cats/show.html.erb:20:in `_app_views_cats_show_html_erb__2928663630848334737_70292235258660'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/3da6d4d0f516d9ac/variables" for ::1 at 2019-08-28 16:42:52 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:43:01 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (387.5ms)
+Completed 500 Internal Server Error in 394ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - undefined local variable or method `cat' for #<#<Class:0x00007fdc5e2a20c8>:0x00007fdc5e3515c8>
+Did you mean?  catch:
+  app/views/cats/show.html.erb:15:in `_app_views_cats_show_html_erb__2928663630848334737_70292225000480'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/7a8ee269a9e7a86a/variables" for ::1 at 2019-08-28 16:43:02 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:51:08 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (4.6ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:1:in `_app_views_cats_show_html_erb__2928663630848334737_70292254513060'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/2dd2203b995208b9/variables" for ::1 at 2019-08-28 16:51:08 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:51:09 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (3.8ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:1:in `_app_views_cats_show_html_erb__2928663630848334737_70292246756180'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/4734bc55164e860b/variables" for ::1 at 2019-08-28 16:51:09 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:51:24 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (3.6ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `age' for nil:NilClass:
+  app/views/cats/show.html.erb:12:in `block in _app_views_cats_show_html_erb__2928663630848334737_70292226978860'
+  app/views/cats/show.html.erb:9:in `_app_views_cats_show_html_erb__2928663630848334737_70292226978860'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/4a84e5f3154aefcc/variables" for ::1 at 2019-08-28 16:51:24 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:52:14 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (3.9ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `name' for nil:NilClass:
+  app/views/cats/show.html.erb:1:in `_app_views_cats_show_html_erb__2928663630848334737_70292256174400'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/c748d556f313331c/variables" for ::1 at 2019-08-28 16:52:14 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:52:29 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (5.7ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `age' for nil:NilClass:
+  app/views/cats/show.html.erb:12:in `block in _app_views_cats_show_html_erb__2928663630848334737_70292311434380'
+  app/views/cats/show.html.erb:9:in `_app_views_cats_show_html_erb__2928663630848334737_70292311434380'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/8f26343ff2c3d60f/variables" for ::1 at 2019-08-28 16:52:29 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:52:34 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (4.7ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `age' for nil:NilClass:
+  app/views/cats/show.html.erb:12:in `block in _app_views_cats_show_html_erb__2928663630848334737_70292226485960'
+  app/views/cats/show.html.erb:9:in `_app_views_cats_show_html_erb__2928663630848334737_70292226485960'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/4d77cbd6a9761047/variables" for ::1 at 2019-08-28 16:52:34 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:52:34 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering cats/show.html.erb within layouts/application
+  Rendered cats/show.html.erb within layouts/application (3.9ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+
+NoMethodError - undefined method `age' for nil:NilClass:
+  app/views/cats/show.html.erb:12:in `block in _app_views_cats_show_html_erb__2928663630848334737_70292234874380'
+  app/views/cats/show.html.erb:9:in `_app_views_cats_show_html_erb__2928663630848334737_70292234874380'
+  app/controllers/cats_controller.rb:9:in `show'
+
+Started POST "/__better_errors/519a4bb8bec7ab31/variables" for ::1 at 2019-08-28 16:52:34 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:53:22 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.6ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 18ms (ActiveRecord: 11.5ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/fd716f7d4677e270/variables" for ::1 at 2019-08-28 16:53:22 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:53:23 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.4ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 2ms (ActiveRecord: 0.4ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/fa0413c86c43f324/variables" for ::1 at 2019-08-28 16:53:23 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:53:28 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 9ms (ActiveRecord: 5.6ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/f9054b9deb363df0/variables" for ::1 at 2019-08-28 16:53:28 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:53:34 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/431af5eae7bb09c7/variables" for ::1 at 2019-08-28 16:53:34 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:53:43 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.4ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 2ms (ActiveRecord: 0.4ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/a1bd1a7cc0321479/variables" for ::1 at 2019-08-28 16:53:43 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:54:28 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.2ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 9ms (ActiveRecord: 5.4ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/f36f91ad079b6476/variables" for ::1 at 2019-08-28 16:54:28 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:54:29 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/9bf64eee29671715/variables" for ::1 at 2019-08-28 16:54:29 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:54:38 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+Completed 400 Bad Request in 3ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: cats:
+  app/controllers/cats_controller.rb:20:in `cat_params'
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/8459c8af46b91737/variables" for ::1 at 2019-08-28 16:54:39 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:54:44 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.2ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 10ms (ActiveRecord: 4.7ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/2befd92a2098b9ab/variables" for ::1 at 2019-08-28 16:54:44 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:54:59 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.1ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 11ms (ActiveRecord: 4.8ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/7bd125f77b68efcb/variables" for ::1 at 2019-08-28 16:55:00 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:55:01 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/4fb8547f84d5df3e/variables" for ::1 at 2019-08-28 16:55:02 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:55:04 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.4ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 3ms (ActiveRecord: 0.4ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/6f15e4a579f8806f/variables" for ::1 at 2019-08-28 16:55:04 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:55:21 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+Completed 400 Bad Request in 2ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: cat:
+  app/controllers/cats_controller.rb:20:in `cat_params'
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/4cc389f1f4f087d5/variables" for ::1 at 2019-08-28 16:55:21 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:55:34 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.2ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 11ms (ActiveRecord: 5.8ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/ee2cc84ddf021eb7/variables" for ::1 at 2019-08-28 16:55:34 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:57:21 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/8d2137837cb765d8/variables" for ::1 at 2019-08-28 16:57:21 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:57:23 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.2ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 2ms (ActiveRecord: 0.2ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/909561b22fdc6713/variables" for ::1 at 2019-08-28 16:57:23 -0700
+Started GET "/cats/1" for ::1 at 2019-08-28 16:57:28 -0700
+Processing by CatsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCat Load (0.3ms)[0m  [1m[34mSELECT  "cats".* FROM "cats" WHERE "cats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/cats_controller.rb:8
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find Cat with 'id'=1:
+  app/controllers/cats_controller.rb:8:in `show'
+
+Started POST "/__better_errors/6293be750ba208d1/variables" for ::1 at 2019-08-28 16:57:28 -0700
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9

@@ -1,0 +1,15 @@
+<h1>Cat Show</h1>
+<%# table redo %>
+<table>
+  <tr>
+    <th>Attribute</th>
+    <th>Value</th>
+  </tr>
+
+  <% [:age, :birth_date, :color, :sex].each do |ele| %>
+    <tr>
+      <td> <%= ele %></td>
+      <td> <%= @cat.send(ele) %> </td>
+    </tr>
+  <% end %>
+</table>

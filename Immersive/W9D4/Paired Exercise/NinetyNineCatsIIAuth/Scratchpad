@@ -1,0 +1,111 @@
+> = add
+
+ADD A USER MODEL
+  X> user_name
+  X> password_digest
+    "as ever, toss on necessary constriants and validations"
+
+ X > session_token
+    require token to be present
+      this means we need an after_intialize callback to set the token if its not already set
+    add a unique index on session token
+      no two users should share a session token
+
+  X> User.reset_session_token!
+    use SecureRandom
+  
+  X> #password=(password)
+    setter method that writes the password_digest attribute with the hash of the given password
+
+  X> #is_password?(password)
+    verified the password (probably from the video lecture example)
+
+  X> ::find_by_credentials(user_name, password)
+    returns the user with the given name if the password is correct
+
+USERSCONTROLLER
+  to allow signup, write a UsersController with
+  
+  methods
+  X> new
+  X> create
+
+SESSIONSCONTROLLER
+  build a SessionsController
+  
+  > :session
+    X add a singular session resource in routes.rb
+      a visitor to your site implicitly has their own session
+      theres no need to create routes for different sessions
+        only  > new
+              > create
+              > destroy <--worry about in next session
+        are needed
+
+  > new
+    render a form for the user to input their username and password
+
+  > create
+    verify the user_name / password
+    reset the users session_token
+    update the session hash with the new session token
+    finally, redirect the user to the cats index page
+
+  X don't forget to add the corresponding views!
+
+USING THE SESSION
+  in the ApplicationController...
+
+  X> current_user
+    method that looks up the user with the current session token
+    
+    since all of your controllers inherit from ApplicationController
+      .:. lets you use the method in any controller
+
+    methods defined in applicationcontroller still arent available in your views though
+      we want to use current_user method there as well so you  need to make a helper method
+        add helper_method to the top of ApplicationController
+          helper_method :current_user
+        
+  use current_user to implement SessionsController#destroy
+
+  X> destroy
+    call #reset_session_token! on current_user to invalidate old token
+      but only if there is a current_user
+      good practice to invalidate the old token in case somebody has stolen the previous users token
+    blank out :session_token in the session hash
+
+EDIT application.html.erb
+  layout
+
+  create a header at the top that shows
+    username (if user is signed in)
+    show a login or logout button depending whether or not the user is signed in
+
+  be sure to login a new user as they sign up
+
+  factor out the login ccode from SessionsController#create to ApplicationController#login_user!
+    we can use it in UsersController after we have done this
+
+  in the User and Session controllers, use a before_actioncallback to redirect the user to the cats index if the user tries to visit hte login/signup pages
+  if they had already signed in
+
+CSRF! time!!!
+  renable CSRF protection
+    remove config.........protect_from_forgery = false from config/application.rb
+  fix forms
+
+USING current_user with CATS and CATRENTALREQUESTS
+
+  cats have an owner!
+    add a user_id column to cats
+      index the foreign key
+    >owner association
+    > cats association
+    validate presence of owner
+
+    in the create action of CatsController
+      be sure user_id gets set to the current user's id
+
+    NB: YOU SHOULD NOT USE A FORM FIELD FOR USER_ID, EVEN A HIDDEN ONE
+

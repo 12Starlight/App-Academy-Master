@@ -1,0 +1,37 @@
+<%# list show %>
+<%= @list.name %>
+<%= @list.description %>
+
+<a href="<%= edit_list_url(@list) %>">Edit List</a>
+
+
+<h3>Add Tasks</h3>
+<form action="<%= list_tasks_url(@list) %>" method="POST">
+  <%= auth_token %>
+
+  <label>
+    Task
+    <input type="text" name="task[body]">  
+  </label>
+
+  <input type="submit" value="Add Task">
+</form>
+
+
+<h3>Deleting Tasks</h3>
+
+<ul>
+  <% @list.tasks.each do |task| %>
+    <li>
+      <%= task.body %>
+      <form action="<%= task_url(task) %>" method="POST">
+        <%= auth_token %>
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Remove Task">
+      </form>
+    </li>
+  <% end %>
+</ul>
+
+
+<a href="<%= list_url %>">Lists</a> 

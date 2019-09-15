@@ -1,0 +1,32 @@
+/* PHASE 4: Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  color: darkgray;
+  margin: 0px 138px;
+  border: 1px solid #ccc;
+  padding: 16px 40px;
+  background: white;
+}
+
+.footer ul {
+  display: flex;
+
+}
+
+.footer ul li {
+    margin: 0px 10px;
+    color: darkgray;
+}
+
+.footer ul li:hover {
+    margin: 0px 10px;
+    color: black;
+}
+
+.left{
+
+
+.right{
+
+}

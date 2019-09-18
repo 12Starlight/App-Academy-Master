@@ -15,3 +15,4 @@ $.ajax({
 });
 // Add another console log here, outside your AJAX request
 console.log("The AJAX request was processed.");
+

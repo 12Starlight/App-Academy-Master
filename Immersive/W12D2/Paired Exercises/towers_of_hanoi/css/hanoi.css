@@ -1,0 +1,13 @@
+ul {
+  border-bottom: 5px solid black; 
+  width: 190px;
+  margin: 30px auto;
+  list-style: none;
+  cursor: pointer;
+}
+
+.hanoi {
+  display: flex;
+  width: 900px;
+  height: 500px;
+}

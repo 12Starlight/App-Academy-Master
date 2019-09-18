@@ -1,0 +1,41 @@
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  width: 606px;
+  list-style: none;
+}
+
+li {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  background: darkgray;
+  box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+li:hover {
+  background: yellow;
+}
+
+.x:after {
+  display: block;
+  text-align: center;
+  line-height: 200px;
+  font-size: 100px;
+  width: 100%;
+  content: "X";
+  background: white;
+  color: blue;
+}
+
+.o:after {
+  display: block;
+  text-align: center;
+  line-height: 200px;
+  font-size: 100px;
+  width: 100%;
+  content: "O";
+  background: white;
+  color: pink;
+  text-shadow: 0 0 3px red;
+}

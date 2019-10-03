@@ -47,7 +47,8 @@ describe('post form container', () => {
       titleInput = postFormWrapper.find('input').filterWhere(input => (
         input.props().type === 'text'
       ));
-      bodyInput = postFormWrapper.find('textarea');
+      // it is looking for a textarea 
+      bodyInput = postFormWrapper.find('textarea'); 
     });
 
     it('correctly maps state to props', () => {

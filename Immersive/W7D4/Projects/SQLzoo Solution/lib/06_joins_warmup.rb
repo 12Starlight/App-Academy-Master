@@ -62,6 +62,7 @@ def trek_films
   # List all of the Star Trek movies, include the id, title and yr (all of
   # these movies include the words Star Trek in the title). Order results by
   # year.
+  # the default for ORDER BY is ASC
   execute(<<-SQL)
     SELECT
       id,
@@ -115,6 +116,7 @@ end
 def casablanca_cast
   # Obtain the cast list for 'Casablanca'. Use the id value that you obtained
   # in the previous question directly in your query (for example, id = 1).
+  # (SELECT id FROM movies WHERE title = 'Casablanca'), gets the movies id value for 'Casablanca'
   execute(<<-SQL)
     SELECT
       actors.name
@@ -129,6 +131,24 @@ end
 
 def alien_cast
   # Obtain the cast list for the film 'Alien'
+
+  # My solution
+  # Solved using a SELECT statment to obtain id 
+  
+  # execute(<<-SQL)
+  #   SELECT 
+  #     actors.name
+  #   FROM
+  #     actors
+  #   INNER JOIN
+  #     castings ON castings.actor_id = actors.id
+  #   WHERE
+  #     castings.movie_id = (SELECT id FROM movies WHERE title = 'Alien')
+  #   ORDER BY
+  #     actors.id 
+  # SQL
+
+  # Solved using two INNER JOINS
   execute(<<-SQL)
     SELECT
       actors.name

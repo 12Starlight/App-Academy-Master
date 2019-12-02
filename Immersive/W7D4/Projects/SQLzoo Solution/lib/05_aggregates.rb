@@ -21,6 +21,7 @@ end
 
 def continents
   # List all the continents - just once each.
+  # DISTINCT(continent) - removes the duplicate continents
   execute(<<-SQL)
     SELECT
       DISTINCT(continent)
@@ -31,6 +32,7 @@ end
 
 def africa_gdp
   # Give the total GDP of Africa.
+  # Do not need to GROUP BY, just returning SUM
   execute(<<-SQL)
     SELECT
       SUM(gdp)
@@ -43,6 +45,7 @@ end
 
 def area_count
   # How many countries have an area of more than 1,000,000?
+  # Just returning COUNT
   execute(<<-SQL)
     SELECT
       COUNT(*)
@@ -55,6 +58,7 @@ end
 
 def group_population
   # What is the total population of ('France','Germany','Spain')?
+  # We are returning SUM, but comparing names IN
   execute(<<-SQL)
     SELECT
       SUM(population)
@@ -67,6 +71,7 @@ end
 
 def country_counts
   # For each continent show the continent and number of countries.
+  # COUNT(name) or COUNT(*) will count all the names
   execute(<<-SQL)
     SELECT
       continent,
@@ -81,6 +86,8 @@ end
 def populous_country_counts
   # For each continent show the continent and number of countries with
   # populations of at least 10 million.
+    # GROUP BY goes after WHERE
+  # FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER, LIMIT
   execute(<<-SQL)
     SELECT
       continent,

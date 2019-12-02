@@ -61,9 +61,9 @@ Component tests:
 1. `frontend/__tests__/post_index-test.js` // post_index_container.jsx, post_index.jsx
   * Write `PostIndexContainer` before `PostIndex`
 2. `frontend/__tests__/post_index_item-test.js` // post_index_item.jsx
-3. `frontend/__tests__/post_form-test.js`
+3. `frontend/__tests__/post_form-test.js` // create_post_form_container.jsx, edit_post_form_container.jsx, post_form.jsx
   * Write `CreatePostFormContainer` and `EditPostFormContainer` before `PostForm`
-4. `frontend/__tests__/post_show-test.js`
+4. `frontend/__tests__/post_show-test.js` // post_show_container.jsx, post_show.jsx
   * Write `PostShowContainer` before `PostForm`
 
 ## Debugging tips

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BlueBird</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%# current_user is a helper method defined in the application controller %>
+    <% if current_user %>
+      <script>
+        {/* 
+          current user is assigned to the window, if we have one which means
+          we have access it to it anywhere we have access to the window 
+        */}
+        window.currentUser = { 
+          "id": <%= current_user.id %>
+          "username": "<%= current_user.username %>",
+          "email": "<%= current_user.email %>"  
+        };
+      </script>    
+    <% end %>
+  </head> 
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

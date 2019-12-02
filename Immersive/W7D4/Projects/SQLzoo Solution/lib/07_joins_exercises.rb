@@ -91,6 +91,8 @@ end
 def travoltas_busiest_years
   # Which were the busiest years for 'John Travolta'? Show the year and the
   # number of movies he made for any year in which he made at least 2 movies.
+  # In SELECT, COUNT(movies.yr) is the same as COUNT(*)
+  # We defined COUNT(*) in having 
   execute(<<-SQL)
     SELECT
       movies.yr,
@@ -144,17 +146,21 @@ end
 def andrews_films_and_leads_joins
   # List the film title and the leading actor for all of the films 'Julie
   # Andrews' played in.
+  # DISTINCT removes all the duplicates
+  # IN does not go with =
+  # SELECT must match WHERE 
+  # INNER JOIN's must join to your FROM statment  
   execute(<<-SQL)
     SELECT
-      movies.title, lead_actors.name
+      julie_movies.title, lead_actors.name
     FROM
-      movies
+      movies AS julie_movies
     JOIN
-      castings julie_castings ON julie_castings.movie_id = movies.id
+      castings julie_castings ON julie_castings.movie_id = julie_movies.id
     JOIN
       actors julie_actors ON julie_castings.actor_id = julie_actors.id
     JOIN
-      castings lead_castings ON lead_castings.movie_id = movies.id
+      castings lead_castings ON lead_castings.movie_id = julie_movies.id
     JOIN
       actors lead_actors ON lead_castings.actor_id = lead_actors.id
     WHERE
@@ -165,6 +171,8 @@ end
 def prolific_actors
   # Obtain a list in alphabetical order of actors who've had at least 15
   # starring roles.
+  # aggregate functions COUNT() should match GROUP BY, * is a shortcut
+  # WHERE goes before GROUP BY
   execute(<<-SQL)
     SELECT
       actors.name
@@ -186,6 +194,12 @@ end
 def films_by_cast_size
   # List the films released in the year 1978 ordered by the number of actors
   # in the cast (descending), then by title (ascending).
+  # ORDER BY must use a comma --> , 
+  # COUNT (DISTINCT castings.actor_id), removes duplicate actor_id's
+  # COUNT(movies.id), same as just counting movies id's 
+  # Think about what you want to GROUP BY, what do you NOT want duplicates of
+  # You can group by anthing but movies.yr or actors becasue you want all the 
+  # films for that year AND you also want every actor for every film played in
   execute(<<-SQL)
     SELECT
       movies.title,
@@ -205,6 +219,10 @@ end
 
 def colleagues_of_garfunkel
   # List all the people who have played alongside 'Art Garfunkel'.
+  # create alias (a1) for the id of movies with the actor
+  # create alias (m1) for all the actors minus the chosen actor and the movies they played in
+  # match the a1.id with the m1.movie_id
+    # return m1.name 
   execute(<<-SQL)
     SELECT
       a1.name

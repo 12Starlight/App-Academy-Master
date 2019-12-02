@@ -1,0 +1,251 @@
+Started GET "/" for ::1 at 2019-10-02 16:09:45 -0500
+  
+ActiveRecord::NoDatabaseError (FATAL:  database "benchBnB_development" does not exist
+):
+  
+activerecord (5.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:696:in `rescue in connect'
+activerecord (5.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:691:in `connect'
+activerecord (5.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:223:in `initialize'
+activerecord (5.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:48:in `new'
+activerecord (5.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:48:in `postgresql_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:811:in `new_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:855:in `checkout_new_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:834:in `try_to_checkout_new_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:795:in `acquire_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:523:in `checkout'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:382:in `connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:1014:in `retrieve_connection'
+activerecord (5.2.3) lib/active_record/connection_handling.rb:118:in `retrieve_connection'
+activerecord (5.2.3) lib/active_record/connection_handling.rb:90:in `connection'
+activerecord (5.2.3) lib/active_record/migration.rb:554:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/" for ::1 at 2019-10-02 16:12:32 -0500
+  
+ActiveRecord::NoDatabaseError (FATAL:  database "benchBnB_development" does not exist
+):
+  
+activerecord (5.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:696:in `rescue in connect'
+activerecord (5.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:691:in `connect'
+activerecord (5.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:223:in `initialize'
+activerecord (5.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:48:in `new'
+activerecord (5.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:48:in `postgresql_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:811:in `new_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:855:in `checkout_new_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:834:in `try_to_checkout_new_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:795:in `acquire_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:523:in `checkout'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:382:in `connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:1014:in `retrieve_connection'
+activerecord (5.2.3) lib/active_record/connection_handling.rb:118:in `retrieve_connection'
+activerecord (5.2.3) lib/active_record/connection_handling.rb:90:in `connection'
+activerecord (5.2.3) lib/active_record/migration.rb:554:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2019-10-02 16:16:03 -0500
+  
+ActiveRecord::NoDatabaseError (FATAL:  database "benchBnB_development" does not exist
+):
+  
+activerecord (5.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:696:in `rescue in connect'
+activerecord (5.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:691:in `connect'
+activerecord (5.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:223:in `initialize'
+activerecord (5.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:48:in `new'
+activerecord (5.2.3) lib/active_record/connection_adapters/postgresql_adapter.rb:48:in `postgresql_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:811:in `new_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:855:in `checkout_new_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:834:in `try_to_checkout_new_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:795:in `acquire_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:523:in `checkout'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:382:in `connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:1014:in `retrieve_connection'
+activerecord (5.2.3) lib/active_record/connection_handling.rb:118:in `retrieve_connection'
+activerecord (5.2.3) lib/active_record/connection_handling.rb:90:in `connection'
+activerecord (5.2.3) lib/active_record/migration.rb:554:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+  [1m[35m (492.7ms)[0m  [1m[35mCREATE DATABASE "benchBnB_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (410.4ms)[0m  [1m[35mCREATE DATABASE "benchBnB_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+Started GET "/" for ::1 at 2019-10-02 16:16:48 -0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/jasimatiyeh/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/jasimatiyeh/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb (2.4ms)
+Completed 200 OK in 11ms (Views: 6.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-10-02 16:16:49 -0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/jasimatiyeh/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/jasimatiyeh/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb (2.3ms)
+Completed 200 OK in 8ms (Views: 4.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-10-02 16:16:51 -0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/jasimatiyeh/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/jasimatiyeh/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb (2.8ms)
+Completed 200 OK in 10ms (Views: 6.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-10-02 16:16:52 -0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/jasimatiyeh/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/jasimatiyeh/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb (3.0ms)
+Completed 200 OK in 10ms (Views: 6.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-10-02 16:16:52 -0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/jasimatiyeh/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/jasimatiyeh/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb (2.2ms)
+Completed 200 OK in 9ms (Views: 4.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-10-02 16:16:52 -0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/jasimatiyeh/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/jasimatiyeh/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb (2.3ms)
+Completed 200 OK in 9ms (Views: 5.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-02 16:16:53 -0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/jasimatiyeh/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/jasimatiyeh/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb (2.6ms)
+Completed 200 OK in 10ms (Views: 5.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-02 16:18:29 -0500
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 1289ms (Views: 1286.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-10-02 16:18:35 -0500
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 18ms (Views: 15.5ms | ActiveRecord: 0.0ms)
+
+
+  [1m[35m (12.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (45.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1878500251809267555)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20191002212243)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (49.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying NOT NULL, "password_digest" character varying NOT NULL, "session_token" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20191002212243_create_users.rb:3
+  [1m[35m (41.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_username" ON "users"  ("username")[0m
+  ↳ db/migrate/20191002212243_create_users.rb:11
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191002212243"]]
+  ↳ bin/rails:9
+  [1m[35m (40.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-10-02 21:27:41.772730"], ["updated_at", "2019-10-02 21:27:41.772730"]]
+  ↳ bin/rails:9
+  [1m[35m (40.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(1878500251809267555)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9

@@ -1,0 +1,11 @@
+<h1>Links</h1>
+
+<ul>
+  <% @links.each do |link|%>
+    <li>
+      <a href="<%= link_url(link) %>"><%= link.title %></a> : <%= link.url %> <%# sending the user to the link show page %>
+    </li>
+  <% end %>
+</ul>
+
+<a href="<%= new_link_url %>">New Link</a> <%# A link sending the user back to the link new page %>

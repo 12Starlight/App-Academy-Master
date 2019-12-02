@@ -1,0 +1,16 @@
+class AttrAccessorObject
+
+  def self.my_attr_accessor(*names) # [cat, dog, mouse] (@dog)
+
+    names.each do |name|
+
+      define_method(name) do
+        instance_variable_get("@#{name}")
+      end
+
+      define_method("#{name}=") do |var|
+        instance_variable_set("@#{name}", var)
+      end
+    end
+  end
+end

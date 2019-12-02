@@ -19,6 +19,7 @@ create your new Postgres database
   bundle exec rails db:create
   bundle exec rails db:migrate
   bundle exec rails db:seed
+  bundle exec rails db:schema:load -- already has several migrations 
 
 rails g migration createPeople name:text some_id:integer etc 
 rails g migration createHouse some_id:integer another_id:integer

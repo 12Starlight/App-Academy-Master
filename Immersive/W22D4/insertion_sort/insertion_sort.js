@@ -13,7 +13,7 @@ const InsertionSort = (arr) => {
 }
 
 // Commented
-// const InsertionSort = (arr) => {
+// const InsertionSort = (arr) => { 
 
      /* 
       the `i` loop will iterate through every element of the array

@@ -366,6 +366,21 @@ Notes:
   * + 1 after fib(n-1) + fib(n-2)
 
 =end
+
+#==============================================================================#
+# Write a method that finds the sum of the first n fibonacci numbers recursively. 
+# Assume n > 0. # 3 times. Use memoization and print in an array
+def fibMemo(num, memo={})
+  return num if num == 0 || num == 1
+  return memo[num] if memo.keys.include?(num)
+
+  memo[num] = fibMemo(num - 1) + fibMemo(nm -2)
+  return memo[num]
+end
+
+p (0..3).map { |x| fibMemo(x) }
+
+
 #==============================================================================#
 # Write a recursive method that returns the sum of the first n even numbers
 # recursively. Assume n > 0.
